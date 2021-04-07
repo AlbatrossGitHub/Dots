@@ -13,7 +13,7 @@ public class DotSpawn : MonoBehaviour
 
     public float dist;
 
-    public int numOfDots;
+    public int rows, columns;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +29,8 @@ public class DotSpawn : MonoBehaviour
 
     public void spawnDot()
     {
-        for(int j = 0; j < numOfDots; j++){
-            for(int i = 0; i < numOfDots; i++){
+        for(int j = 0; j < rows; j++){
+            for(int i = 0; i < columns; i++){
                 Instantiate(dot, new Vector3(x+i*dist, y+j, 0), Quaternion.identity);
                 //Instantiate(prefab, new Vector3(i * 2.0F, 0, 0), Quaternion.identity);
             }

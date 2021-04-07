@@ -367,7 +367,8 @@ MonoBehaviour:
   x: -7
   y: 10
   dist: 1.5
-  numOfDots: 5
+  rows: 6
+  columns: 6
 --- !u!4 &1882479166
 Transform:
   m_ObjectHideFlags: 0
