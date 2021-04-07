@@ -37,5 +37,9 @@ public class DotSpawn : MonoBehaviour
         }
     }
 
+    //if statement to check if the next
+    //dot is x+1, x-1 or y+1, y-1 of the initial dot
+    
+
 }
 
