@@ -27,11 +27,25 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //GameObject theDot = GameObject.Find("Dot");
-        //GameManager dotScript = theDot.GetComponent<DotBehavior>();
+        
+        if(Input.GetMouseButtonDown(0)){
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //GameObject theDot = GameObject.Find("Dot");
+            //GameManager dotScript = theDot.GetComponent<DotBehavior>();
 
-        selectedDot = GameObject.Find("Dot").GetComponent<DotBehavior>().chosenDot;
+            selectedDot = GameObject.Find("Dot").GetComponent<DotBehavior>().chosenDot;
+
+            Vector3 direction = (selectedDot - mousePos).normalized;
+
+            RaycastHit2D hit = Physics2D.Raycast(selectedDot, direction, 2f);
+
+            Debug.Log(hit);
+        }
+
+        //subtract mouseposition from the selected dot position and then normalize it
+        //to give it a set distance, you can use the distance parameter of the raycast function, OR use an actual distance check
+        //what Unity is able to do, is say if it was hit
+
         
     }
 

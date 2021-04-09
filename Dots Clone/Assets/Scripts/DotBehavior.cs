@@ -20,7 +20,10 @@ public class DotBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Vector3 selectedDot = GameObject.Find("Game Manager").GetComponent<GameManager>().selectedDot;
+        if(transform.position.y > selectedDot.y && gameObject.tag == "Dot"){
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
     }
 
     public void colorGen()
@@ -54,15 +57,16 @@ public class DotBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             chosenDot = gameObject.transform.position;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false; //   REMEMBER TO TURN THIS BACK ON LATER
             
             
         }
         
     }
 
-    void OnMouseExit()
+    void OnMouseUp()
     {
-        
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
     }
 
 
