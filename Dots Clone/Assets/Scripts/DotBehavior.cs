@@ -8,6 +8,7 @@ public class DotBehavior : MonoBehaviour
     public SpriteRenderer dotSprite;
 
     public int dotColor;
+    public Vector3 chosenDot;
 
 
     // Start is called before the first frame update
@@ -47,6 +48,23 @@ public class DotBehavior : MonoBehaviour
             dotSprite.color = yellow;
         }
     }
+
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            chosenDot = gameObject.transform.position;
+            
+            
+        }
+        
+    }
+
+    void OnMouseExit()
+    {
+        
+    }
+
 
     //click first dot drag to other dots.
 }

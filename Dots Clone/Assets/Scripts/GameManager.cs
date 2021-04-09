@@ -4,17 +4,40 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    public Vector3 selectedDot;
+    public Transform mouse;
+
+
+    public Transform direction;
+
+    //public Vector3 mousePos;
+
+    //Camera.ScreenToWorldPoint
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+        
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //GameObject theDot = GameObject.Find("Dot");
+        //GameManager dotScript = theDot.GetComponent<DotBehavior>();
+
+        selectedDot = GameObject.Find("Dot").GetComponent<DotBehavior>().chosenDot;
         
     }
+
+   
+
+}
 
     //raycast detect, then triggers dot behavior script
     //each dot has
@@ -33,4 +56,4 @@ public class GameManager : MonoBehaviour
     //
     //last is deteching and scoring
 
-}
+
