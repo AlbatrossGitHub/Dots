@@ -14,6 +14,8 @@ public class OtherGameManager : MonoBehaviour
     public GameObject connectedDot;
     public GameObject endDot;
 
+    public LineRenderer myLineRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +69,10 @@ public class OtherGameManager : MonoBehaviour
             } else {
                 lineEnd = mousePos;
             }
+
+            myLineRenderer.SetPosition(0, selectedDot.transform.position);
+            myLineRenderer.SetPosition(1, lineEnd);
+
             // RaycastHit mHit;
             // // = Physics.Raycast(mousePos, mousePosZ, 20f);
             // if(Physics.Raycast(mousePos, mousePosZ, out mHit, 20f)){
