@@ -28,8 +28,16 @@ public class OtherDotBehavior : MonoBehaviour
 
     
 
-     void OnMouseOver()
+     void OnMouseEnter()
     {
-        //if()
+        myManager.endDot = gameObject;
+        Debug.Log("I am OVER this!");//if()
     }
+
+    void OnMouseExit()
+    {
+        myManager.endDot = null;
+        Debug.Log("I am NOT OVER this!");
+    }
+
 }

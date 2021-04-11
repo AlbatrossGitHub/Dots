@@ -12,59 +12,77 @@ public class OtherGameManager : MonoBehaviour
 
     //the second dot that gamemanager collider hits
     public GameObject connectedDot;
+    public GameObject endDot;
 
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        lineEnd = mousePos;
+        mousePos = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //variable fo rthe mouse position
+        lineEnd = mousePos; //line end is the variable for where the ray should end
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        lineEnd = mousePos;
-        if (collision.gameObject.tag == "Dot" && collision.gameObject != selectedDot)
-        {
-            dotOrigin = collision.gameObject.transform.position;
-            lineEnd = dotOrigin;
+    // void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     Debug.Log("collided");
+    //     lineEnd = mousePos;
+    //     if (collision.gameObject.tag == "Dot" && collision.gameObject != selectedDot) //if it has the dot tag and is not the selected dot
+    //     {
+    //         Debug.Log("if statement");
+    //         dotOrigin = collision.gameObject.transform.position;
+    //         lineEnd = dotOrigin;
+    //     }
+    //     else
+    //     {
+    //         lineEnd = mousePos;
+    //     }
+    //     //if(the Game manager hitbox is collding with a dot hitbox && the
+    //     //game manager hitbox is NOT colliding with the dot that we are getting the selectedDot variable from)
+    //     //{ dotOrigin = coordinates of the dot that the gamemanager is colliding with
+    // }
 
-        }
-        else
-        {
-            lineEnd = mousePos;
-        }
+    // void OnTriggerExit2D(Collider2D collision)
+    // {
+    //     if (collision.gameObject.tag == "Dot" && collision.gameObject != selectedDot)
+    //     {
+    //         lineEnd = mousePos;
 
-        //if(the Game manager hitbox is collding with a dot hitbox && the
-        //game manager hitbox is NOT colliding with the dot that we are getting the selectedDot variable from)
-        //{ dotOrigin = coordinates of the dot that the gamemanager is colliding with
-    }
-
-    public void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Dot" && collision.gameObject != selectedDot)
-        {
-            lineEnd = mousePos;
-
-        }
-    }
+    //     }
+    // }
 
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //get the mouse position
-        gameObject.transform.position = mousePos;
+        mousePos = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //get the mouse position
+        Vector3 mousePosZ = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+        gameObject.transform.position = mousePos; //moves the object this script is on to where the mouse is
 
-        if (selectedDot != null)
+
+
+        if (selectedDot != null) //if we have  clicked on a dot
         {
+
+            if(endDot != null){
+                lineEnd = endDot.transform.position;
+            } else {
+                lineEnd = mousePos;
+            }
+            // RaycastHit mHit;
+            // // = Physics.Raycast(mousePos, mousePosZ, 20f);
+            // if(Physics.Raycast(mousePos, mousePosZ, out mHit, 20f)){
+            //     lineEnd = mHit.collider.gameObject.transform.position;
+            // } else {
+            //     lineEnd = mousePosZ;
+            // }
+
             //lineEnd = mousePos;
 
-            RaycastHit2D hit = Physics2D.Raycast(selectedDot.transform.position, lineEnd, 25f);
+            RaycastHit2D hit = Physics2D.Raycast(selectedDot.transform.position, lineEnd, 25f); //
             Debug.DrawLine(selectedDot.transform.position, lineEnd, Color.red);
-            if (hit != null)
-            {
-                lineEnd = dotOrigin;
-            }
+            // if (hit != null)
+            // {
+            //     lineEnd = dotOrigin;
+            // }
         }
 
         /*if(Input.GetMouseButtonDown(0)){
