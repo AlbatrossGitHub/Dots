@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class DotSpawn : MonoBehaviour
 {
 
@@ -42,4 +43,5 @@ public class DotSpawn : MonoBehaviour
     
 
 }
+*/
 

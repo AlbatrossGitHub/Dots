@@ -5,69 +5,116 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    public Vector3 selectedDot;
-    public Transform mouse;
+    public GameObject selectedDot;
+    public Vector3 lineEnd;
+    public Vector3 dotOrigin;
+    public Vector3 mousePos;
 
+    //the second dot that gamemanager collider hits
+    public GameObject connectedDot;
+    public GameObject endDot;
 
-    public Transform direction;
-
-    //public Vector3 mousePos;
-
-    //Camera.ScreenToWorldPoint
-
-
+    public LineRenderer myLineRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        
+        mousePos = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //variable fo rthe mouse position
+        lineEnd = mousePos; //line end is the variable for where the ray should end
     }
+
+    // void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     Debug.Log("collided");
+    //     lineEnd = mousePos;
+    //     if (collision.gameObject.tag == "Dot" && collision.gameObject != selectedDot) //if it has the dot tag and is not the selected dot
+    //     {
+    //         Debug.Log("if statement");
+    //         dotOrigin = collision.gameObject.transform.position;
+    //         lineEnd = dotOrigin;
+    //     }
+    //     else
+    //     {
+    //         lineEnd = mousePos;
+    //     }
+    //     //if(the Game manager hitbox is collding with a dot hitbox && the
+    //     //game manager hitbox is NOT colliding with the dot that we are getting the selectedDot variable from)
+    //     //{ dotOrigin = coordinates of the dot that the gamemanager is colliding with
+    // }
+
+    // void OnTriggerExit2D(Collider2D collision)
+    // {
+    //     if (collision.gameObject.tag == "Dot" && collision.gameObject != selectedDot)
+    //     {
+    //         lineEnd = mousePos;
+
+    //     }
+    // }
+
 
     // Update is called once per frame
     void Update()
     {
-        
-        if(Input.GetMouseButtonDown(0)){
+        mousePos = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //get the mouse position
+        Vector3 mousePosZ = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+        gameObject.transform.position = mousePos; //moves the object this script is on to where the mouse is
+
+
+
+        if (selectedDot != null) //if we have  clicked on a dot
+        {
+
+            if(endDot != null){
+                lineEnd = endDot.transform.position;
+            } else {
+                lineEnd = mousePos;
+            }
+
+            myLineRenderer.SetPosition(0, selectedDot.transform.position);
+            myLineRenderer.SetPosition(1, lineEnd);
+
+            // RaycastHit mHit;
+            // // = Physics.Raycast(mousePos, mousePosZ, 20f);
+            // if(Physics.Raycast(mousePos, mousePosZ, out mHit, 20f)){
+            //     lineEnd = mHit.collider.gameObject.transform.position;
+            // } else {
+            //     lineEnd = mousePosZ;
+            // }
+
+            //lineEnd = mousePos;
+
+            RaycastHit2D hit = Physics2D.Raycast(selectedDot.transform.position, lineEnd, 25f); //
+            Debug.DrawLine(selectedDot.transform.position, lineEnd, Color.red);
+            // if (hit != null)
+            // {
+            //     lineEnd = dotOrigin;
+            // }
+        }
+
+        /*if(Input.GetMouseButtonDown(0)){
+
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
+            
+
             //GameObject theDot = GameObject.Find("Dot");
             //GameManager dotScript = theDot.GetComponent<DotBehavior>();
 
-            selectedDot = GameObject.Find("Dot").GetComponent<DotBehavior>().chosenDot;
+           // selectedDot = GameObject.Find("Dot").GetComponent<DotBehavior>().chosenDot;
 
-            Vector3 direction = (selectedDot - mousePos).normalized;
+            Vector3 direction = Vector3.left;//(selectedDot.transform.position - mousePos).normalized;
 
-            RaycastHit2D hit = Physics2D.Raycast(selectedDot, direction, 2f);
+            RaycastHit2D hit = Physics2D.Raycast(selectedDot.transform.position, mousePos, 2f);
+
+            Debug.DrawRay(selectedDot.transform.position, direction);
 
             Debug.Log(hit);
+            Debug.Log(hit.collider.gameObject.name);
         }
+        */
 
-        //subtract mouseposition from the selected dot position and then normalize it
-        //to give it a set distance, you can use the distance parameter of the raycast function, OR use an actual distance check
-        //what Unity is able to do, is say if it was hit
 
-        
     }
 
-   
-
+    
 }
-
-    //raycast detect, then triggers dot behavior script
-    //each dot has
-
-    //theres a mousepressed thing we can use
-
-    //bool for connected
-
-    //continuous raycast from mouse
-
-    //counter to check if the mouse is hovering over a dot the second time or the first time and then determine if it should connect or detach
-
-    //first thing is to detect mouse click and have line follow/extend
-    //second to detect and connect to other dots
-    //
-    //
-    //last is deteching and scoring
-
-

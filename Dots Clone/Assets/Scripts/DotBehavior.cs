@@ -4,71 +4,41 @@ using UnityEngine;
 
 public class DotBehavior : MonoBehaviour
 {
-    public Color red, blue, green, yellow;
-    public SpriteRenderer dotSprite;
 
-    public int dotColor;
-    public Vector3 chosenDot;
+    public GameManager myManager;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        colorGen();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 selectedDot = GameObject.Find("Game Manager").GetComponent<GameManager>().selectedDot;
-        if(transform.position.y > selectedDot.y && gameObject.tag == "Dot"){
-            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        }
+
     }
 
-    public void colorGen()
+    void OnMouseDown()
     {
-        int rand = UnityEngine.Random.Range(0, 4);
-
-        if(rand == 0)
-        {
-            dotSprite.color = red;
-            dotColor = rand;
-        }
-
-        if(rand == 1)
-        {
-            dotSprite.color = blue;
-        }
-
-        if(rand == 2)
-        {
-            dotSprite.color = green;
-        }
-
-        if(rand == 3)
-        {
-            dotSprite.color = yellow;
-        }
+        myManager.selectedDot = gameObject; //lowercase G means the one we are on
+        //gameObject.GetComponent<CircleCollider2D>().enabled = false;
     }
 
-    void OnMouseOver()
+
+
+    void OnMouseEnter()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            chosenDot = gameObject.transform.position;
-            gameObject.GetComponent<BoxCollider2D>().enabled = false; //   REMEMBER TO TURN THIS BACK ON LATER
-            
-            
-        }
-        
+        myManager.endDot = gameObject;
+        Debug.Log("I am OVER this!");//if()
     }
 
-    void OnMouseUp()
+    void OnMouseExit()
     {
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        myManager.endDot = null;
+        Debug.Log("I am NOT OVER this!");
     }
 
-
-    //click first dot drag to other dots.
 }
