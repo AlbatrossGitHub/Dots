@@ -157,7 +157,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.65913135, g: 0.84241307, b: 0.8679245, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -656,6 +656,7 @@ MonoBehaviour:
   lineEnd: {x: 0, y: 0, z: 0}
   dotOrigin: {x: 0, y: 0, z: 0}
   mousePos: {x: 0, y: 0, z: 0}
+  selectedDots: []
   connectedDot: {fileID: 0}
   endDot: {fileID: 0}
   myLineRenderer: {fileID: 1588728633}

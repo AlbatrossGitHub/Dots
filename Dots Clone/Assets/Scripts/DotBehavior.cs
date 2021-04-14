@@ -33,6 +33,12 @@ public class DotBehavior : MonoBehaviour
     {
         myManager.endDot = gameObject;
         Debug.Log("I am OVER this!");//if()
+
+        if (!myManager.selectedDots.Contains(gameObject))
+        {
+            myManager.selectedDots.Add(gameObject);
+        }
+
     }
 
     void OnMouseExit()

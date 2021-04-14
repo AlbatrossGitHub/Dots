@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public Vector3 dotOrigin;
     public Vector3 mousePos;
 
+    public List<GameObject> selectedDots = new List<GameObject>();
+
     //the second dot that gamemanager collider hits
     public GameObject connectedDot;
     public GameObject endDot;
@@ -22,34 +24,6 @@ public class GameManager : MonoBehaviour
         mousePos = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //variable fo rthe mouse position
         lineEnd = mousePos; //line end is the variable for where the ray should end
     }
-
-    // void OnTriggerEnter2D(Collider2D collision)
-    // {
-    //     Debug.Log("collided");
-    //     lineEnd = mousePos;
-    //     if (collision.gameObject.tag == "Dot" && collision.gameObject != selectedDot) //if it has the dot tag and is not the selected dot
-    //     {
-    //         Debug.Log("if statement");
-    //         dotOrigin = collision.gameObject.transform.position;
-    //         lineEnd = dotOrigin;
-    //     }
-    //     else
-    //     {
-    //         lineEnd = mousePos;
-    //     }
-    //     //if(the Game manager hitbox is collding with a dot hitbox && the
-    //     //game manager hitbox is NOT colliding with the dot that we are getting the selectedDot variable from)
-    //     //{ dotOrigin = coordinates of the dot that the gamemanager is colliding with
-    // }
-
-    // void OnTriggerExit2D(Collider2D collision)
-    // {
-    //     if (collision.gameObject.tag == "Dot" && collision.gameObject != selectedDot)
-    //     {
-    //         lineEnd = mousePos;
-
-    //     }
-    // }
 
 
     // Update is called once per frame
@@ -64,55 +38,75 @@ public class GameManager : MonoBehaviour
         if (selectedDot != null) //if we have  clicked on a dot
         {
 
-            if(endDot != null){
-                lineEnd = endDot.transform.position;
-            } else {
-                lineEnd = mousePos;
+            myLineRenderer.positionCount = 0;
+
+            
+
+            if(Input.GetMouseButton(0))
+            {
+                myLineRenderer.enabled = true;
+
+                if (selectedDots.Count > 1)
+                {
+                    myLineRenderer.positionCount = selectedDots.Count;
+
+                    for (int i = 0; i < selectedDots.Count; i++)
+                    {
+                        myLineRenderer.SetPosition(i, selectedDots[i].transform.position);
+                    }
+
+                    if(endDot == null || endDot == selectedDot)
+                    {
+
+                        myLineRenderer.positionCount += 1;
+                        myLineRenderer.SetPosition(selectedDots.Count, mousePos);
+
+                    }
+
+                }
+
+                else
+                {
+                    myLineRenderer.positionCount = 2;
+                    lineEnd = mousePos;
+                    myLineRenderer.SetPosition(0, selectedDot.transform.position);
+                    myLineRenderer.SetPosition(1, lineEnd);
+                }
+
+                
+                Debug.Log("pressed");
             }
 
-            myLineRenderer.SetPosition(0, selectedDot.transform.position);
-            myLineRenderer.SetPosition(1, lineEnd);
+            else
+            {
+                myLineRenderer.enabled = false;
+            }
 
-            // RaycastHit mHit;
-            // // = Physics.Raycast(mousePos, mousePosZ, 20f);
-            // if(Physics.Raycast(mousePos, mousePosZ, out mHit, 20f)){
-            //     lineEnd = mHit.collider.gameObject.transform.position;
-            // } else {
-            //     lineEnd = mousePosZ;
-            // }
+            if (Input.GetMouseButtonUp(0))
+            {
+                myLineRenderer.positionCount = 0;
+                //foreach(GameObject dot in selectedDots)
+                //{
+                //    selectedDots.Remove(dot);
+                //}
 
-            //lineEnd = mousePos;
+                selectedDots = new List<GameObject>();
+                selectedDot = null;
+            }
 
+            if (Input.GetMouseButtonDown(0))
+            {               
+                selectedDots = new List<GameObject>();
+                selectedDots.Add(selectedDot);
+            }
+            
             RaycastHit2D hit = Physics2D.Raycast(selectedDot.transform.position, lineEnd, 25f); //
             Debug.DrawLine(selectedDot.transform.position, lineEnd, Color.red);
-            // if (hit != null)
-            // {
-            //     lineEnd = dotOrigin;
-            // }
+            
         }
 
-        /*if(Input.GetMouseButtonDown(0)){
-
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            
-            
-
-            //GameObject theDot = GameObject.Find("Dot");
-            //GameManager dotScript = theDot.GetComponent<DotBehavior>();
-
-           // selectedDot = GameObject.Find("Dot").GetComponent<DotBehavior>().chosenDot;
-
-            Vector3 direction = Vector3.left;//(selectedDot.transform.position - mousePos).normalized;
-
-            RaycastHit2D hit = Physics2D.Raycast(selectedDot.transform.position, mousePos, 2f);
-
-            Debug.DrawRay(selectedDot.transform.position, direction);
-
-            Debug.Log(hit);
-            Debug.Log(hit.collider.gameObject.name);
-        }
-        */
-
+        
+        //store information of direction of the dot
 
     }
 
