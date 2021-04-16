@@ -7,7 +7,7 @@ public class DotBehavior : MonoBehaviour
 
     public GameManager myManager;
 
-
+    public bool selected = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +38,7 @@ public class DotBehavior : MonoBehaviour
         {
             myManager.selectedDots.Add(gameObject);
         }
+
 
     }
 

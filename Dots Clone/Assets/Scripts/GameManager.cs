@@ -82,8 +82,27 @@ public class GameManager : MonoBehaviour
                 myLineRenderer.enabled = false;
             }
 
+            if (Input.GetMouseButtonDown(0))
+            {
+                selectedDots = new List<GameObject>();
+                selectedDots.Add(selectedDot);
+
+                selectedDot.GetComponent<DotBehavior>().selected = true;
+            }
+
             if (Input.GetMouseButtonUp(0))
             {
+
+                if (selectedDot.GetComponent<DotBehavior>().selected && selectedDots.Count > 1)
+                {
+                    for (int i = 0; i < selectedDots.Count; i++)
+                    {
+                        Destroy(selectedDots[i]);
+                    }
+
+                    selectedDots = new List<GameObject>();
+                }
+
                 myLineRenderer.positionCount = 0;
                 //foreach(GameObject dot in selectedDots)
                 //{
@@ -92,17 +111,18 @@ public class GameManager : MonoBehaviour
 
                 selectedDots = new List<GameObject>();
                 selectedDot = null;
+
+                
+
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {               
-                selectedDots = new List<GameObject>();
-                selectedDots.Add(selectedDot);
+            
+            if(selectedDot != null)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(selectedDot.transform.position, lineEnd, 25f); //
+                Debug.DrawLine(selectedDot.transform.position, lineEnd, Color.red);
             }
-            
-            RaycastHit2D hit = Physics2D.Raycast(selectedDot.transform.position, lineEnd, 25f); //
-            Debug.DrawLine(selectedDot.transform.position, lineEnd, Color.red);
-            
+
         }
 
         
