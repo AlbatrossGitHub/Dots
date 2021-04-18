@@ -15,6 +15,8 @@ public class DotBehavior : MonoBehaviour
 
     public Color color;
 
+    public int selectionCounter = 0; //turn this into an enum later
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,8 @@ public class DotBehavior : MonoBehaviour
     void OnMouseDown()
     {
         myManager.selectedDot = gameObject; //lowercase G means the one we are on
+        myManager.myLineRenderer.startColor = color;
+        myManager.myLineRenderer.endColor = color;
         //when we click the mouse, this dot becomes the selected dot
     }
 
@@ -51,22 +55,47 @@ public class DotBehavior : MonoBehaviour
             }
             if(Mathf.Abs(gridX-xPrevious) <= 1 && Mathf.Abs(gridY-yPrevious) <= 1){
                 if(myManager.selectedDot != null && myManager.selectedDot.GetComponent<DotBehavior>().color == color){
-                    myManager.endDot = gameObject; //if the mouse hovers over this dot, it becomes end dot, and adds it to the list if not on the list already
+                    if(myManager.squareReady == false){
+                        myManager.endDot = gameObject; //if the mouse hovers over this dot, it becomes end dot, and adds it to the list if not on the list already
+                    }
                     //Debug.Log("I am OVER this!");
-                    if (!myManager.selectedDots.Contains(gameObject))
+                    if (!myManager.selectedDots.Contains(gameObject) && myManager.squareReady == false)
                     {
                         myManager.selectedDots.Add(gameObject);
+                    } else {
+                        if(myManager.selectedDots[myManager.selectedDots.Count - 1] == gameObject && selectionCounter == 1){ //if this is the last thing on the list
+                            if(myManager.squareReady == false){
+                                myManager.selectedDots.Remove(gameObject);
+                            } else {
+                                myManager.squareReady = false;
+                                myManager.selectedDots.RemoveAt(myManager.selectedDots.Count-1);
+                            }
+                            selectionCounter = 2;
+                            myManager.endDot = null;
+                        }
+                        if(selectionCounter < 2 && myManager.selectedDots.Count - myManager.selectedDots.IndexOf(gameObject) >= 3 && myManager.squareReady == false){
+                            myManager.selectedDots.Add(gameObject);
+                            myManager.squareReady = true;//GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(color);
+                        }
                     }
                 }
             }
         }
-
     }
 
     void OnMouseExit()
     {
         myManager.endDot = null;
         //Debug.Log("I am NOT OVER this!");
+        if(selectionCounter == 0){
+            selectionCounter = 1;
+        }
+        if(selectionCounter == 2){
+            selectionCounter = 0;
+        }
+
+
+
     }
 
 }

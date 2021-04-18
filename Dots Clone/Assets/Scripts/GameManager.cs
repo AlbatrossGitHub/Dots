@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     public LineRenderer myLineRenderer;
 
+    public bool squareReady = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,15 +35,9 @@ public class GameManager : MonoBehaviour
         Vector3 mousePosZ = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
         gameObject.transform.position = mousePos; //moves the object this script is on to where the mouse is
 
-
-
         if (selectedDot != null) //if we have  clicked on a dot
         {
-
             myLineRenderer.positionCount = 0;
-
-            
-
             if(Input.GetMouseButton(0))
             {
                 myLineRenderer.enabled = true;
@@ -57,10 +53,10 @@ public class GameManager : MonoBehaviour
 
                     if(endDot == null || endDot == selectedDot)
                     {
-
-                        myLineRenderer.positionCount += 1;
-                        myLineRenderer.SetPosition(selectedDots.Count, mousePos);
-
+                        if(!squareReady){
+                            myLineRenderer.positionCount += 1;
+                            myLineRenderer.SetPosition(selectedDots.Count, mousePos);
+                        }
                     }
 
                 }
@@ -92,14 +88,19 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
+                //GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(GameObject.Find("GridManager").GetComponent<GridManager>().tileColor[1]); THIS WAS JUST FOR TESTING
 
                 if (selectedDot.GetComponent<DotBehavior>().selected && selectedDots.Count > 1)
                 {
-                    for (int i = 0; i < selectedDots.Count; i++)
-                    {
-                        Destroy(selectedDots[i]);
+                    if(squareReady){
+                        GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(selectedDot.GetComponent<DotBehavior>().color);
+                        squareReady = false;
+                    } else {
+                        for (int i = 0; i < selectedDots.Count; i++)
+                        {
+                            Destroy(selectedDots[i]);
+                        }
                     }
-
                     selectedDots = new List<GameObject>();
                 }
 
