@@ -97,6 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myManager: {fileID: 0}
   selected: 0
+  gridX: 0
+  gridY: 0
 --- !u!58 &7880622317752590571
 CircleCollider2D:
   m_ObjectHideFlags: 0

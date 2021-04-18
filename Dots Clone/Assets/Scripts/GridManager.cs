@@ -35,9 +35,11 @@ public class GridManager : MonoBehaviour
         newTile.transform.SetParent(gameObject.transform);
         SpriteRenderer myRenderer = newTile.GetComponent<SpriteRenderer>(); //access new tile sprite renderer
         int randCol = Random.Range(0, tileColor.Length); //generate a random number between zero and however many colors I have
-        myRenderer.color = tileColor[randCol]; //set the color to whatever index the tile color has in the array
         tiles.Add(newTile);
         DotBehavior myBehavior = newTile.GetComponent<DotBehavior>();
+        myBehavior.myManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        myBehavior.color = tileColor[randCol];
+        myRenderer.color = myBehavior.color; //set the color to whatever index the tile color has in the array
         myBehavior.gridX = x;
         myBehavior.gridY = y;
     }
