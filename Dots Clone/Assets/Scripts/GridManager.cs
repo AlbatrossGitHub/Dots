@@ -14,6 +14,9 @@ public class GridManager : MonoBehaviour
     List<GameObject> tiles = new List<GameObject>();
 
     public gridPos[,] gridArray;
+    
+    [Range(0, 1)]
+    public float step = .1f;
 
     public struct gridPos
     {
@@ -58,7 +61,8 @@ public class GridManager : MonoBehaviour
         myBehavior.color = tileColor[randCol];
         myRenderer.color = myBehavior.color; //set the color to whatever index the tile color has in the array
         myBehavior.gridX = x;
-        myBehavior.gridY = y;                
+        myBehavior.gridY = y;
+        myBehavior.step = step;
         return newTile;
     }
 
@@ -91,7 +95,7 @@ public class GridManager : MonoBehaviour
                         while (thisDot.GetComponent<DotBehavior>().gridY > 0 && gridArray[i, thisDot.GetComponent<DotBehavior>().gridY - 1].dot == null)
                         {
                             int localY = thisDot.GetComponent<DotBehavior>().gridY;
-                            gridArray[i, localY].dot.transform.position = gridArray[i, localY - 1].location;
+                            gridArray[i, localY].dot.GetComponent<DotBehavior>().gridPosition = gridArray[i, localY - 1].location;
                             gridArray[i, localY - 1].dot = gridArray[i, localY].dot;
                             gridArray[i, localY].dot = null;
 

@@ -17,18 +17,24 @@ public class DotBehavior : MonoBehaviour
 
     public int selectionCounter = 0; //turn this into an enum later
 
-    public Transform gridPosition;
+    public Vector3 gridPosition;
+
+    public float step = .1f;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        //set grid position
+        gridPosition = gameObject.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(Vector3.Distance(gameObject.transform.position, gridPosition) > .1f)
+        {
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, gridPosition, step);
+        }
     }
 
     void OnMouseDown()
