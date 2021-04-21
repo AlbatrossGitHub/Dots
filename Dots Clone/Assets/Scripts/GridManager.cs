@@ -46,7 +46,7 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //dropDown();
     }
 
     GameObject CreateTile(int x, int y){ //this is a function which will return a gameobject value.
@@ -79,13 +79,15 @@ public class GridManager : MonoBehaviour
 
     }
 
+    //to have dots fall
     public void dropDown()
     {
         for (int i = 0; i < xSize; i++)
         {
             for (int j = 0; j < ySize; j++)
-            {                
-                if(gridArray[i,j].dot != null && j>0)
+            {
+                
+                if(gridArray[i,j].dot != null && j > 0)
                 {
                     //Debug.Log(i + "," + j);
                     if (gridArray[i, j - 1].dot == null)
@@ -108,6 +110,49 @@ public class GridManager : MonoBehaviour
                 
             }
         }
+
+        repopulateCheck();
     }
+
+    public void repopulate()
+    {
+        
+        for (int i = 0; i < xSize; i++)
+        {
+            if (gridArray[i, ySize - 1].dot == null)
+            {                
+                gridArray[i, ySize - 1].dot = CreateTile(i, ySize - 1);                
+            }
+        }
+
+        
+
+        dropDown();
+
+    }
+
+    //variable used in repopulate check n stuff
+    int extraCheck = 0;
+
+    public void repopulateCheck()
+    {
+        int nullCounter = 0;
+
+        for (int i = 0; i < xSize; i++)
+        {
+            if (gridArray[i, ySize - 1].dot == null)
+            {                
+                nullCounter++;
+            }
+        }        
+
+        if (nullCounter > 0)
+        {
+            repopulate();
+        }
+    }
+
+    //maybe need to copy dropDown function to make it look up
+    //make another function. if theres another 
 
 }
