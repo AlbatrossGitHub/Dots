@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public bool squareReady = false;
 
+    public GridManager gridManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,10 +100,12 @@ public class GameManager : MonoBehaviour
                     } else {
                         for (int i = 0; i < selectedDots.Count; i++)
                         {
+                            gridManager.gridArray[selectedDots[i].GetComponent<DotBehavior>().gridX, selectedDots[i].GetComponent<DotBehavior>().gridY].dot = null;
                             Destroy(selectedDots[i]);
                         }
                     }
                     selectedDots = new List<GameObject>();
+                    gridManager.dropDown();
                 }
 
                 myLineRenderer.positionCount = 0;

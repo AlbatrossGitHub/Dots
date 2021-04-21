@@ -13,9 +13,9 @@ public class GridManager : MonoBehaviour
 
     List<GameObject> tiles = new List<GameObject>();
 
-    gridPos[,] gridArray;
+    public gridPos[,] gridArray;
 
-    struct gridPos
+    public struct gridPos
     {
         public GameObject dot;
         public Vector3 location;
@@ -65,7 +65,7 @@ public class GridManager : MonoBehaviour
     public void ColorClear(Color Col){
         for(int i = 0; i < xSize; i++){
             for(int j = 0; j < ySize; j++){
-                if(gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col){
+                if(gridArray[i, j].dot != null && gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col){
                     Destroy(gridArray[i, j].dot);
                     gridArray[i, j].dot = null;
                 }
