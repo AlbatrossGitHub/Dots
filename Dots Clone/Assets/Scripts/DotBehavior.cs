@@ -17,6 +17,8 @@ public class DotBehavior : MonoBehaviour
 
     public int selectionCounter = 0; //turn this into an enum later
 
+    public Transform gridPosition;
+
     // Start is called before the first frame update
     void Start()
     {

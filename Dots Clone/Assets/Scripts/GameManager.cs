@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 
-                Debug.Log("pressed");
+                //Debug.Log("pressed");
             }
 
             else
