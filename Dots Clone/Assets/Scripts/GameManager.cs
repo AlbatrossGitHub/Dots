@@ -95,13 +95,16 @@ public class GameManager : MonoBehaviour
                 if (selectedDot.GetComponent<DotBehavior>().selected && selectedDots.Count > 1)
                 {
                     if(squareReady){
+                        //if you make a square and it deletes everything
                         GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(selectedDot.GetComponent<DotBehavior>().color);
                         squareReady = false;
                     } else {
+                        //straight line
                         for (int i = 0; i < selectedDots.Count; i++)
                         {
-                            gridManager.gridArray[selectedDots[i].GetComponent<DotBehavior>().gridX, selectedDots[i].GetComponent<DotBehavior>().gridY].dot = null;
-                            Destroy(selectedDots[i]);
+                            Debug.Log(gridManager);
+                            gridManager.gridArray[selectedDots[i].GetComponent<DotBehavior>().gridX, selectedDots[i].GetComponent<DotBehavior>().gridY].dot = null; //removing the dot from the datastructure
+                            Destroy(selectedDots[i]); //deleting the dot itself
                         }
                     }
                     selectedDots = new List<GameObject>();

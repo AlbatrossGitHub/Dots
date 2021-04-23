@@ -66,6 +66,7 @@ public class GridManager : MonoBehaviour
         return newTile;
     }
 
+    // when youre making a square
     public void ColorClear(Color Col){
         for(int i = 0; i < xSize; i++){
             for(int j = 0; j < ySize; j++){
@@ -92,6 +93,8 @@ public class GridManager : MonoBehaviour
                     //Debug.Log(i + "," + j);
                     if (gridArray[i, j - 1].dot == null)
                     {
+                        Debug.Log("Should drop down");
+
                         GameObject thisDot = gridArray[i, j].dot;
 
                         while (thisDot.GetComponent<DotBehavior>().gridY > 0 && gridArray[i, thisDot.GetComponent<DotBehavior>().gridY - 1].dot == null)
@@ -120,12 +123,10 @@ public class GridManager : MonoBehaviour
         for (int i = 0; i < xSize; i++)
         {
             if (gridArray[i, ySize - 1].dot == null)
-            {                
+            {
                 gridArray[i, ySize - 1].dot = CreateTile(i, ySize - 1);                
             }
         }
-
-        
 
         dropDown();
 

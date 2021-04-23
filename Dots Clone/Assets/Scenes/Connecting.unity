@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465969622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.04, z: -10}
+  m_LocalPosition: {x: 1.97, y: 2.01, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -325,6 +325,7 @@ MonoBehaviour:
   endDot: {fileID: 0}
   myLineRenderer: {fileID: 1588728633}
   squareReady: 0
+  gridManager: {fileID: 1969832001}
 --- !u!4 &1588728631
 Transform:
   m_ObjectHideFlags: 0
@@ -494,13 +495,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileObj: {fileID: 7880622317752590568, guid: 98d7259af4527eb4f86dec4fea5e05c2, type: 3}
   xSize: 5
-  ySize: 5
+  ySize: 7
   tileColor:
   - {r: 0.18422928, g: 0.72595507, b: 0.8679245, a: 1}
   - {r: 1, g: 0.3066038, b: 0.4880389, a: 1}
   startPos: {x: -2, y: -2, z: 0}
   xStagger: 2
   yStagger: 2
+  step: 0.1
 --- !u!4 &1969832002
 Transform:
   m_ObjectHideFlags: 0
