@@ -495,7 +495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileObj: {fileID: 7880622317752590568, guid: 98d7259af4527eb4f86dec4fea5e05c2, type: 3}
   xSize: 5
-  ySize: 7
+  ySize: 6
   tileColor:
   - {r: 0.18422928, g: 0.72595507, b: 0.8679245, a: 1}
   - {r: 1, g: 0.3066038, b: 0.4880389, a: 1}

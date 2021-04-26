@@ -113,7 +113,7 @@ public class GridManager : MonoBehaviour
                     //Debug.Log(i + "," + j);
                     if (gridArray[i, j - 1].dot == null)
                     {
-                        Debug.Log("Should drop down");
+                        int origY = j;
 
                         GameObject thisDot = gridArray[i, j].dot;
 
@@ -122,10 +122,15 @@ public class GridManager : MonoBehaviour
                             int localY = thisDot.GetComponent<DotBehavior>().gridY;
                             gridArray[i, localY].dot.GetComponent<DotBehavior>().gridPosition = gridArray[i, localY - 1].location;
                             gridArray[i, localY - 1].dot = gridArray[i, localY].dot;
-                            gridArray[i, localY].dot = null;
+                            //gridArray[i, localY].dot = null;
 
                             gridArray[i, localY - 1].dot.GetComponent<DotBehavior>().gridY -= 1;
 
+                        }
+
+                        while(origY > thisDot.GetComponent<DotBehavior>().gridY){
+                            gridArray[i, origY].dot = null;
+                            origY--;
                         }
 
                     }
@@ -142,7 +147,7 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < ySize; j++){
                 if(gridArray[i, j].dot == null){
-                    gridArray[i, j].dot = CreateTile(i, j);
+                    gridArray[i, j].dot = CreateTile(i, j, gridArray[i, ySize-1].location);
                     gridArray[i, j].dot.GetComponent<DotBehavior>().gridPosition = gridArray[i, j].location;
                 }
             }
