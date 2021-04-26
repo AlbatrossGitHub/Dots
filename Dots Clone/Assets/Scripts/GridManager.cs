@@ -46,7 +46,8 @@ public class GridManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //dropDown();
+        dropDown();
+        repopulate();
     }
 
     GameObject CreateTile(int x, int y){ //this is a function which will return a gameobject value.
@@ -62,6 +63,25 @@ public class GridManager : MonoBehaviour
         myRenderer.color = myBehavior.color; //set the color to whatever index the tile color has in the array
         myBehavior.gridX = x;
         myBehavior.gridY = y;
+        myBehavior.gridPosition = newTile.transform.position;
+        myBehavior.step = step;
+        return newTile;
+    }
+
+    GameObject CreateTile(int x, int y, Vector3 flingPos){ //this is a function which will return a gameobject value.
+        GameObject newTile = Instantiate(tileObj, transform.position, transform.rotation);
+        newTile.transform.position = flingPos;
+        newTile.transform.SetParent(gameObject.transform);
+        SpriteRenderer myRenderer = newTile.GetComponent<SpriteRenderer>(); //access new tile sprite renderer
+        int randCol = Random.Range(0, tileColor.Length); //generate a random number between zero and however many colors I have
+        tiles.Add(newTile);
+        DotBehavior myBehavior = newTile.GetComponent<DotBehavior>();
+        myBehavior.myManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        myBehavior.color = tileColor[randCol];
+        myRenderer.color = myBehavior.color; //set the color to whatever index the tile color has in the array
+        myBehavior.gridX = x;
+        myBehavior.gridY = y;
+        myBehavior.gridPosition = new Vector3(startPos.x + x*xStagger, startPos.y + y*yStagger, transform.position.z);
         myBehavior.step = step;
         return newTile;
     }
@@ -76,7 +96,7 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-        dropDown();
+        //dropDown();
 
     }
 
@@ -113,8 +133,6 @@ public class GridManager : MonoBehaviour
                 
             }
         }
-
-        repopulateCheck();
     }
 
     public void repopulate()
@@ -122,13 +140,17 @@ public class GridManager : MonoBehaviour
         
         for (int i = 0; i < xSize; i++)
         {
-            if (gridArray[i, ySize - 1].dot == null)
-            {
-                gridArray[i, ySize - 1].dot = CreateTile(i, ySize - 1);                
+            for (int j = 0; j < ySize; j++){
+                if(gridArray[i, j].dot == null){
+                    gridArray[i, j].dot = CreateTile(i, j);
+                    gridArray[i, j].dot.GetComponent<DotBehavior>().gridPosition = gridArray[i, j].location;
+                }
             }
+            // if (gridArray[i, ySize - 1].dot == null)
+            // {
+            //     gridArray[i, ySize - 1].dot = CreateTile(i, ySize - 1);                
+            // }
         }
-
-        dropDown();
 
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -102,13 +102,12 @@ public class GameManager : MonoBehaviour
                         //straight line
                         for (int i = 0; i < selectedDots.Count; i++)
                         {
-                            Debug.Log(gridManager);
+                            //Debug.Log(gridManager);
                             gridManager.gridArray[selectedDots[i].GetComponent<DotBehavior>().gridX, selectedDots[i].GetComponent<DotBehavior>().gridY].dot = null; //removing the dot from the datastructure
                             Destroy(selectedDots[i]); //deleting the dot itself
                         }
                     }
                     selectedDots = new List<GameObject>();
-                    gridManager.dropDown();
                 }
 
                 myLineRenderer.positionCount = 0;

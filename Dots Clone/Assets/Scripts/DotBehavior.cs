@@ -25,11 +25,11 @@ public class DotBehavior : MonoBehaviour
     void Start()
     {
         //set grid position
-        gridPosition = gameObject.transform.position;
+        //gridPosition = gameObject.transform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(Vector3.Distance(gameObject.transform.position, gridPosition) > .1f)
         {
