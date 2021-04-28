@@ -39,7 +39,7 @@ public class GridManager : MonoBehaviour
         gridArray = new gridPos [xSize, ySize];
         for(int x = 0; x < xSize; x++){
             for(int y = 0; y < ySize; y++){
-                GameObject newTile = CreateTile(x, y);
+                GameObject newTile = CreateTile(x, y, -1);
                 gridArray[x, y] = new gridPos(newTile, newTile.transform.position); //our 2D array is an array of x that holds an array of y that holds an array of gameobjects.
             }
         }
@@ -54,12 +54,16 @@ public class GridManager : MonoBehaviour
         repopulate();
     }
 
-    GameObject CreateTile(int x, int y){ //this is a function which will return a gameobject value.
+    GameObject CreateTile(int x, int y, int colorAvoid){ //this is a function which will return a gameobject value.
         GameObject newTile = Instantiate(tileObj, transform.position, transform.rotation);
         newTile.transform.position = new Vector3(startPos.x + x*xStagger, startPos.y + y*yStagger, transform.position.z);
         newTile.transform.SetParent(gameObject.transform);
         SpriteRenderer myRenderer = newTile.GetComponent<SpriteRenderer>(); //access new tile sprite renderer
-        int randCol = Random.Range(0, numColors); //generate a random number between zero and however many colors I have
+        int randCol = -1;
+        while(randCol == -1 || randCol == colorAvoid)
+        {
+            randCol = Random.Range(0, numColors); //generate a random number between zero and however many colors I have
+        }        
         tiles.Add(newTile);
         DotBehavior myBehavior = newTile.GetComponent<DotBehavior>();
         myBehavior.myManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -72,12 +76,16 @@ public class GridManager : MonoBehaviour
         return newTile;
     }
 
-    GameObject CreateTile(int x, int y, Vector3 flingPos){ //this is a function which will return a gameobject value.
+    GameObject CreateTile(int x, int y, int colorAvoid, Vector3 flingPos){ //this is a function which will return a gameobject value.
         GameObject newTile = Instantiate(tileObj, transform.position, transform.rotation);
         newTile.transform.position = flingPos;
         newTile.transform.SetParent(gameObject.transform);
         SpriteRenderer myRenderer = newTile.GetComponent<SpriteRenderer>(); //access new tile sprite renderer
-        int randCol = Random.Range(0, numColors); //generate a random number between zero and however many colors I have
+        int randCol = -1;
+        while (randCol == -1 || randCol == colorAvoid)
+        {
+            randCol = Random.Range(0, numColors); //generate a random number between zero and however many colors I have
+        }
         tiles.Add(newTile);
         DotBehavior myBehavior = newTile.GetComponent<DotBehavior>();
         myBehavior.myManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -95,6 +103,14 @@ public class GridManager : MonoBehaviour
         //declaring variable for score
         int scoreSquare = myManager.GetComponent<GameManager>().score;
         int colorCount = 0;
+
+        for (int c = 0; c < tileColor.Length; c++)
+        {
+            if(tileColor[c] == Col)
+            {
+                prevColor = c;
+            }
+        }
 
         for (int i = 0; i < xSize; i++){
             for(int j = 0; j < ySize; j++){
@@ -153,6 +169,8 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    int prevColor = 0;
+
     public void repopulate()
     {
         
@@ -161,7 +179,7 @@ public class GridManager : MonoBehaviour
             for (int j = 0; j < ySize; j++){
                 if(gridArray[i, j].dot == null){
                     Vector3 offsetPos = new Vector3(gridArray[i, ySize - 1].location.x, gridArray[i, ySize - 1].location.y + j * yStagger, gridArray[i, ySize - 1].location.z);
-                    gridArray[i, j].dot = CreateTile(i, j, offsetPos);
+                    gridArray[i, j].dot = CreateTile(i, j, prevColor, offsetPos);
                     gridArray[i, j].dot.GetComponent<DotBehavior>().gridPosition = gridArray[i, j].location;
                 }
             }
@@ -171,6 +189,7 @@ public class GridManager : MonoBehaviour
             // }
         }
 
+        prevColor = -1;
     }
 
     //variable used in repopulate check n stuff
