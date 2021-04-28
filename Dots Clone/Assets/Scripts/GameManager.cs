@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
     public Vector3 lineEnd;
     public Vector3 dotOrigin;
     public Vector3 mousePos;
+
+    public Text scoreText;
 
     public List<GameObject> selectedDots = new List<GameObject>();
 
@@ -22,11 +25,15 @@ public class GameManager : MonoBehaviour
 
     public GridManager gridManager;
 
+    public int score;
+
     // Start is called before the first frame update
     void Start()
     {
         mousePos = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //variable fo rthe mouse position
         lineEnd = mousePos; //line end is the variable for where the ray should end
+
+        scoreText.text = "";
     }
 
 
@@ -36,6 +43,8 @@ public class GameManager : MonoBehaviour
         mousePos = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //get the mouse position
         Vector3 mousePosZ = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
         gameObject.transform.position = mousePos; //moves the object this script is on to where the mouse is
+
+        scoreText.text = "" + score;
 
         if (selectedDot != null) //if we have  clicked on a dot
         {
@@ -104,10 +113,13 @@ public class GameManager : MonoBehaviour
                         {
                             //Debug.Log(gridManager);
                             gridManager.gridArray[selectedDots[i].GetComponent<DotBehavior>().gridX, selectedDots[i].GetComponent<DotBehavior>().gridY].dot = null; //removing the dot from the datastructure
+                            score += 100 * i;
                             Destroy(selectedDots[i]); //deleting the dot itself
+                            Debug.Log(score);
                         }
                     }
                     selectedDots = new List<GameObject>();
+                    
                 }
 
                 myLineRenderer.positionCount = 0;

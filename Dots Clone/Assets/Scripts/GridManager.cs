@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-
+    public GameManager myManager;
     public GameObject tileObj;
     public int xSize, ySize;
     public Color[] tileColor; //making an array of colors
@@ -17,6 +17,8 @@ public class GridManager : MonoBehaviour
     
     [Range(0, 1)]
     public float step = .1f;
+
+    public int numColors;
 
     public struct gridPos
     {
@@ -32,6 +34,8 @@ public class GridManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
         gridArray = new gridPos [xSize, ySize];
         for(int x = 0; x < xSize; x++){
             for(int y = 0; y < ySize; y++){
@@ -55,7 +59,7 @@ public class GridManager : MonoBehaviour
         newTile.transform.position = new Vector3(startPos.x + x*xStagger, startPos.y + y*yStagger, transform.position.z);
         newTile.transform.SetParent(gameObject.transform);
         SpriteRenderer myRenderer = newTile.GetComponent<SpriteRenderer>(); //access new tile sprite renderer
-        int randCol = Random.Range(0, tileColor.Length); //generate a random number between zero and however many colors I have
+        int randCol = Random.Range(0, numColors); //generate a random number between zero and however many colors I have
         tiles.Add(newTile);
         DotBehavior myBehavior = newTile.GetComponent<DotBehavior>();
         myBehavior.myManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -73,7 +77,7 @@ public class GridManager : MonoBehaviour
         newTile.transform.position = flingPos;
         newTile.transform.SetParent(gameObject.transform);
         SpriteRenderer myRenderer = newTile.GetComponent<SpriteRenderer>(); //access new tile sprite renderer
-        int randCol = Random.Range(0, tileColor.Length); //generate a random number between zero and however many colors I have
+        int randCol = Random.Range(0, numColors); //generate a random number between zero and however many colors I have
         tiles.Add(newTile);
         DotBehavior myBehavior = newTile.GetComponent<DotBehavior>();
         myBehavior.myManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
@@ -88,16 +92,25 @@ public class GridManager : MonoBehaviour
 
     // when youre making a square
     public void ColorClear(Color Col){
-        for(int i = 0; i < xSize; i++){
+        //declaring variable for score
+        int scoreSquare = myManager.GetComponent<GameManager>().score;
+        int colorCount = 0;
+
+        for (int i = 0; i < xSize; i++){
             for(int j = 0; j < ySize; j++){
                 if(gridArray[i, j].dot != null && gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col){
+                    scoreSquare += 100 * colorCount;
+                    colorCount++;
                     Destroy(gridArray[i, j].dot);
+                    Debug.Log(scoreSquare);
                     gridArray[i, j].dot = null;
                 }
             }
         }
         //dropDown();
 
+        //update the points in the GameManager
+        myManager.GetComponent<GameManager>().score = scoreSquare;
     }
 
     //to have dots fall
@@ -147,7 +160,8 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < ySize; j++){
                 if(gridArray[i, j].dot == null){
-                    gridArray[i, j].dot = CreateTile(i, j, gridArray[i, ySize-1].location);
+                    Vector3 offsetPos = new Vector3(gridArray[i, ySize - 1].location.x, gridArray[i, ySize - 1].location.y + j * yStagger, gridArray[i, ySize - 1].location.z);
+                    gridArray[i, j].dot = CreateTile(i, j, offsetPos);
                     gridArray[i, j].dot.GetComponent<DotBehavior>().gridPosition = gridArray[i, j].location;
                 }
             }
