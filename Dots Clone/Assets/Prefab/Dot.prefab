@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7880622317752590570}
   - component: {fileID: 7880622317752590580}
   - component: {fileID: 7880622317752590571}
+  - component: {fileID: 94032078354870132}
   m_Layer: 0
   m_Name: Dot
   m_TagString: Dot
@@ -99,6 +100,11 @@ MonoBehaviour:
   selected: 0
   gridX: 0
   gridY: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  selectionCounter: 0
+  gridPosition: {x: 0, y: 0, z: 0}
+  step: 0.1
+  myAnim: {fileID: 94032078354870132}
 --- !u!58 &7880622317752590571
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -115,3 +121,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.5
+--- !u!95 &94032078354870132
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7880622317752590568}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c224c7c622248f243acf088d8918ee81, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
