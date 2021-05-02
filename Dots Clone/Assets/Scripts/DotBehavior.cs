@@ -21,6 +21,8 @@ public class DotBehavior : MonoBehaviour
 
     public float step = .1f;
 
+    public Animator myAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,10 @@ public class DotBehavior : MonoBehaviour
         {
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, gridPosition, step);
         }
+
+        // if(selected == true){
+        //     myAnim.SetBool("selected", true);
+        // }
     }
 
     void OnMouseDown()
@@ -43,6 +49,7 @@ public class DotBehavior : MonoBehaviour
         myManager.myLineRenderer.startColor = color;
         myManager.myLineRenderer.endColor = color;
         //when we click the mouse, this dot becomes the selected dot
+        //myAnim.SetBool("selected", true);
     }
 
 
@@ -104,6 +111,11 @@ public class DotBehavior : MonoBehaviour
 
 
 
+    }
+
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
     }
 
 }
