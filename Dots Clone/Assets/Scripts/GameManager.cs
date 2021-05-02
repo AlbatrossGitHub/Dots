@@ -111,10 +111,10 @@ public class GameManager : MonoBehaviour
                         //straight line
                         for (int i = 0; i < selectedDots.Count; i++)
                         {
-                            //Debug.Log(gridManager);
-                            gridManager.gridArray[selectedDots[i].GetComponent<DotBehavior>().gridX, selectedDots[i].GetComponent<DotBehavior>().gridY].dot = null; //removing the dot from the datastructure
+                            //Debug.Log(gridManager);                            
                             score += 100 * i;
-                            Destroy(selectedDots[i]); //deleting the dot itself
+                            selectedDots[i].GetComponent<Animator>().SetBool("delete", true);
+                            //Destroy(selectedDots[i]); //deleting the dot itself
                             Debug.Log(score);
                         }
                     }
@@ -144,10 +144,28 @@ public class GameManager : MonoBehaviour
 
         }
 
+
         
         //store information of direction of the dot
 
     }
 
+    public void squareAnim()
+    {
+        foreach (GameObject d in selectedDots)
+        {
+            if (!d.GetComponent<Animator>().GetBool("selected"))
+            {
+                d.GetComponent<Animator>().SetBool("selected", true);
+            }
+            else
+            {
+                d.GetComponent<Animator>().SetBool("selected", false);
+                d.GetComponent<Animator>().SetBool("selected", true);
+            }
+        }
+
+        gridManager.ColorPulse(selectedDot.GetComponent<DotBehavior>().color);
+    }
     
 }

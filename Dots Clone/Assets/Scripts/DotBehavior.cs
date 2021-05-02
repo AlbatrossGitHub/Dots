@@ -46,6 +46,7 @@ public class DotBehavior : MonoBehaviour
     void OnMouseDown()
     {
         myManager.selectedDot = gameObject; //lowercase G means the one we are on
+        myAnim.SetBool("selected", true);
         myManager.myLineRenderer.startColor = color;
         myManager.myLineRenderer.endColor = color;
         //when we click the mouse, this dot becomes the selected dot
@@ -74,9 +75,11 @@ public class DotBehavior : MonoBehaviour
                         myManager.endDot = gameObject; //if the mouse hovers over this dot, it becomes end dot, and adds it to the list if not on the list already
                     }
                     //Debug.Log("I am OVER this!");
+                    //adding dots to list when selected (NOT square)
                     if (!myManager.selectedDots.Contains(gameObject) && myManager.squareReady == false)
                     {
                         myManager.selectedDots.Add(gameObject);
+                        myAnim.SetBool("selected", true);
                     } else {
                         if(myManager.selectedDots[myManager.selectedDots.Count - 1] == gameObject && selectionCounter == 1){ //if this is the last thing on the list
                             if(myManager.squareReady == false){
@@ -91,6 +94,8 @@ public class DotBehavior : MonoBehaviour
                         if(selectionCounter < 2 && myManager.selectedDots.Count - myManager.selectedDots.IndexOf(gameObject) >= 3 && myManager.squareReady == false){
                             myManager.selectedDots.Add(gameObject);
                             myManager.squareReady = true;//GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(color);
+                            //myAnim.SetTrigger("selected trigger");
+                            myManager.squareAnim();
                         }
                     }
                 }
@@ -115,7 +120,13 @@ public class DotBehavior : MonoBehaviour
 
     public void DestroyGameObject()
     {
+        myManager.gridManager.gridArray[gridX, gridY].dot = null; //removing the dot from the datastructure
         Destroy(gameObject);
+    }
+
+    public void boolFalse()
+    {
+        myAnim.SetBool("selected", false);
     }
 
 }

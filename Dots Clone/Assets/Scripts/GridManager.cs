@@ -178,7 +178,7 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < ySize; j++){
                 if(gridArray[i, j].dot == null){
-                    Vector3 offsetPos = new Vector3(gridArray[i, ySize - 1].location.x, gridArray[i, ySize - 1].location.y + j * yStagger, gridArray[i, ySize - 1].location.z);
+                    Vector3 offsetPos = new Vector3(gridArray[i, ySize - 1].location.x, gridArray[i, ySize - 1].location.y + (j + 1) * yStagger, gridArray[i, ySize - 1].location.z);
                     gridArray[i, j].dot = CreateTile(i, j, prevColor, offsetPos);
                     gridArray[i, j].dot.GetComponent<DotBehavior>().gridPosition = gridArray[i, j].location;
                 }
@@ -215,5 +215,28 @@ public class GridManager : MonoBehaviour
 
     //maybe need to copy dropDown function to make it look up
     //make another function. if theres another 
+
+    public void ColorPulse(Color Col)
+    {
+
+        for (int i = 0; i < xSize; i++)
+        {
+            for (int j = 0; j < ySize; j++)
+            {
+                if (gridArray[i, j].dot != null && gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col && !myManager.selectedDots.Contains(gridArray[i,j].dot))
+                {
+
+                    gridArray[i, j].dot.GetComponent<Animator>().SetBool("selected", true);
+
+                    
+                    
+                }
+            }
+        }
+        //dropDown();
+
+        
+        
+    }
 
 }
