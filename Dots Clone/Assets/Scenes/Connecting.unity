@@ -169,10 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1000, y: 800}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -418,7 +418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -257, y: 147}
+  m_AnchoredPosition: {x: -397, y: 223}
   m_SizeDelta: {x: 104.01729, y: 51.53183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1034871366
@@ -741,7 +741,7 @@ MonoBehaviour:
   myManager: {fileID: 1588728630}
   tileObj: {fileID: 7880622317752590568, guid: 98d7259af4527eb4f86dec4fea5e05c2, type: 3}
   xSize: 5
-  ySize: 6
+  ySize: 5
   tileColor:
   - {r: 0.18422928, g: 0.72595507, b: 0.8679245, a: 1}
   - {r: 1, g: 0.3066038, b: 0.4880389, a: 1}
