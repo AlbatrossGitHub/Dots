@@ -45,8 +45,11 @@ public class DotBehavior : MonoBehaviour
 
     void OnMouseDown()
     {
-        myManager.selectedDot = gameObject; //lowercase G means the one we are on
-        myAnim.SetBool("selected", true);
+        myManager.selectedDot = gameObject; //lowercase G means the one we are on        
+        if (myManager.isActiveAndEnabled == true)
+        {
+            myAnim.SetBool("selected", true);
+        }
         myManager.myLineRenderer.startColor = color;
         myManager.myLineRenderer.endColor = color;
         //when we click the mouse, this dot becomes the selected dot
@@ -79,7 +82,11 @@ public class DotBehavior : MonoBehaviour
                     if (!myManager.selectedDots.Contains(gameObject) && myManager.squareReady == false)
                     {
                         myManager.selectedDots.Add(gameObject);
-                        myAnim.SetBool("selected", true);
+                        if (myManager.isActiveAndEnabled == true)
+                        {
+                            myAnim.SetBool("selected", true);
+                        }
+                        
                     } else {
                         if(myManager.selectedDots[myManager.selectedDots.Count - 1] == gameObject && selectionCounter == 1){ //if this is the last thing on the list
                             if(myManager.squareReady == false){

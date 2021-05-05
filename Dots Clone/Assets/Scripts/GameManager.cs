@@ -24,8 +24,13 @@ public class GameManager : MonoBehaviour
     public bool squareReady = false;
 
     public GridManager gridManager;
+    public MatchBlitz matchBlitz;
 
     public int score;
+
+    public int matchCount;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -107,6 +112,16 @@ public class GameManager : MonoBehaviour
                         //if you make a square and it deletes everything
                         GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(selectedDot.GetComponent<DotBehavior>().color);
                         squareReady = false;
+                        matchCount++;
+                        Debug.Log(matchCount);
+                        if (matchBlitz != null)
+                        {
+                            Debug.Log("hello I am here");
+                            int movesLeft = matchBlitz.GetComponent<MatchBlitz>().movesLeft;
+                            movesLeft--;
+
+                            matchBlitz.GetComponent<MatchBlitz>().movesLeft = movesLeft;
+                        }
                     } else {
                         //straight line
                         for (int i = 0; i < selectedDots.Count; i++)
@@ -115,8 +130,21 @@ public class GameManager : MonoBehaviour
                             score += 100 * i;
                             selectedDots[i].GetComponent<Animator>().SetBool("delete", true);
                             //Destroy(selectedDots[i]); //deleting the dot itself
-                            Debug.Log(score);
+                            
                         }
+
+                        if (matchBlitz != null)
+                        {
+                            Debug.Log("hello I am here");
+                            int movesLeft = matchBlitz.GetComponent<MatchBlitz>().movesLeft;
+                            movesLeft--;
+
+                            matchBlitz.GetComponent<MatchBlitz>().movesLeft = movesLeft;
+                        }
+                            
+
+                        matchCount++;
+                        Debug.Log(matchCount);
                     }
                     selectedDots = new List<GameObject>();
                     

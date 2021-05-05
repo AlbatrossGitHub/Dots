@@ -103,6 +103,7 @@ public class GridManager : MonoBehaviour
         //declaring variable for score
         int scoreSquare = myManager.GetComponent<GameManager>().score;
         int colorCount = 0;
+        
 
         for (int c = 0; c < tileColor.Length; c++)
         {
@@ -118,7 +119,7 @@ public class GridManager : MonoBehaviour
                     scoreSquare += 100 * colorCount;
                     colorCount++;
                     Destroy(gridArray[i, j].dot);
-                    Debug.Log(scoreSquare);
+                    //Debug.Log(scoreSquare);
                     gridArray[i, j].dot = null;
                 }
             }
