@@ -48,6 +48,7 @@ public class DotBehavior : MonoBehaviour
         myManager.selectedDot = gameObject; //lowercase G means the one we are on        
         if (myManager.isActiveAndEnabled == true)
         {
+            Debug.Log("play clicked when selected");
             myAnim.SetBool("selected", true);
         }
         myManager.myLineRenderer.startColor = color;
@@ -84,9 +85,11 @@ public class DotBehavior : MonoBehaviour
                         myManager.selectedDots.Add(gameObject);
                         if (myManager.isActiveAndEnabled == true)
                         {
+                            //myAnim.SetTrigger("selected trigger");
+                            Debug.Log("go to regular connected selected");
                             myAnim.SetBool("selected", true);
                         }
-                        
+
                     } else {
                         if(myManager.selectedDots[myManager.selectedDots.Count - 1] == gameObject && selectionCounter == 1){ //if this is the last thing on the list
                             if(myManager.squareReady == false){
@@ -133,7 +136,7 @@ public class DotBehavior : MonoBehaviour
 
     public void boolFalse()
     {
-        myAnim.SetBool("selected", false);
+        //myAnim.SetBool("selected", false);
     }
 
 }

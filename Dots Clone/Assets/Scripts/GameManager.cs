@@ -182,15 +182,22 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject d in selectedDots)
         {
-            if (!d.GetComponent<Animator>().GetBool("selected"))
+            if (d.GetComponent<Animator>().GetBool("selected") == true)
             {
-                d.GetComponent<Animator>().SetBool("selected", true);
+                Debug.Log("goto final selected");
+                d.GetComponent<Animator>().SetBool("final selected", true);
+                //d.GetComponent<Animator>().SetBool("selected", true);
+
             }
             else
             {
-                d.GetComponent<Animator>().SetBool("selected", false);
+                Debug.Log("go to regular selected");
+                //d.GetComponent<Animator>().SetBool("selected", false);
                 d.GetComponent<Animator>().SetBool("selected", true);
             }
+
+            //d.GetComponent<Animator>().SetTrigger("selected trigger");
+
         }
 
         gridManager.ColorPulse(selectedDot.GetComponent<DotBehavior>().color);
