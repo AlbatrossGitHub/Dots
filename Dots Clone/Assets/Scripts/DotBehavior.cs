@@ -130,6 +130,7 @@ public class DotBehavior : MonoBehaviour
 
     public void DestroyGameObject()
     {
+        Debug.Log(transform.localScale);
         myManager.gridManager.gridArray[gridX, gridY].dot = null; //removing the dot from the datastructure
         Destroy(gameObject);
     }
