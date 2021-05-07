@@ -30,12 +30,12 @@ public class GameManager : MonoBehaviour
 
     public int matchCount;
 
-
+    bool refreshDots = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        mousePos = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //variable fo rthe mouse position
+        mousePos = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //variable fo rthe mouse position
         lineEnd = mousePos; //line end is the variable for where the ray should end
 
         scoreText.text = "";
@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePos = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //get the mouse position
-        Vector3 mousePosZ = new Vector3 (Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+        mousePos = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //get the mouse position
+        Vector3 mousePosZ = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
         gameObject.transform.position = mousePos; //moves the object this script is on to where the mouse is
 
         scoreText.text = "" + score;
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         if (selectedDot != null) //if we have  clicked on a dot
         {
             myLineRenderer.positionCount = 0;
-            if(Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
             {
                 myLineRenderer.enabled = true;
 
@@ -67,9 +67,10 @@ public class GameManager : MonoBehaviour
                         myLineRenderer.SetPosition(i, selectedDots[i].transform.position);
                     }
 
-                    if(endDot == null || endDot == selectedDot)
+                    if (endDot == null || endDot == selectedDot)
                     {
-                        if(!squareReady){
+                        if (!squareReady)
+                        {
                             myLineRenderer.positionCount += 1;
                             myLineRenderer.SetPosition(selectedDots.Count, mousePos);
                         }
@@ -85,7 +86,7 @@ public class GameManager : MonoBehaviour
                     myLineRenderer.SetPosition(1, lineEnd);
                 }
 
-                
+
                 //Debug.Log("pressed");
             }
 
@@ -108,21 +109,14 @@ public class GameManager : MonoBehaviour
 
                 if (selectedDot.GetComponent<DotBehavior>().selected && selectedDots.Count > 1)
                 {
-                    if(squareReady){
+                    if (squareReady)
+                    {
                         //if you make a square and it deletes everything
-                        GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(selectedDot.GetComponent<DotBehavior>().color);
-                        squareReady = false;
-                        matchCount++;
-                        Debug.Log(matchCount);
-                        if (matchBlitz != null)
-                        {
-                            Debug.Log("hello I am here");
-                            int movesLeft = matchBlitz.GetComponent<MatchBlitz>().movesLeft;
-                            movesLeft--;
-
-                            matchBlitz.GetComponent<MatchBlitz>().movesLeft = movesLeft;
-                        }
-                    } else {
+                        StartCoroutine(squareDelete());
+                        refreshDots = false;
+                    }
+                    else
+                    {
                         //straight line
                         for (int i = 0; i < selectedDots.Count; i++)
                         {
@@ -130,7 +124,7 @@ public class GameManager : MonoBehaviour
                             score += 100 * i;
                             selectedDots[i].GetComponent<Animator>().SetBool("delete", true);
                             //Destroy(selectedDots[i]); //deleting the dot itself
-                            
+
                         }
 
                         if (matchBlitz != null)
@@ -141,30 +135,37 @@ public class GameManager : MonoBehaviour
 
                             matchBlitz.GetComponent<MatchBlitz>().movesLeft = movesLeft;
                         }
-                            
+
 
                         matchCount++;
                         Debug.Log(matchCount);
+                        refreshDots = true;
                     }
+                    if (refreshDots)
+                    {
+                        selectedDots = new List<GameObject>();
+                    }
+
+                }
+                if (refreshDots)
+                {
+                    myLineRenderer.positionCount = 0;
+                    //foreach(GameObject dot in selectedDots)
+                    //{
+                    //    selectedDots.Remove(dot);
+                    //}
+
                     selectedDots = new List<GameObject>();
-                    
+                    selectedDot = null;
                 }
 
-                myLineRenderer.positionCount = 0;
-                //foreach(GameObject dot in selectedDots)
-                //{
-                //    selectedDots.Remove(dot);
-                //}
 
-                selectedDots = new List<GameObject>();
-                selectedDot = null;
 
-                
 
             }
 
-            
-            if(selectedDot != null)
+
+            if (selectedDot != null)
             {
                 RaycastHit2D hit = Physics2D.Raycast(selectedDot.transform.position, lineEnd, 25f); //
                 Debug.DrawLine(selectedDot.transform.position, lineEnd, Color.red);
@@ -173,8 +174,34 @@ public class GameManager : MonoBehaviour
         }
 
 
-        
+
         //store information of direction of the dot
+
+    }
+
+    IEnumerator squareDelete()
+    {
+        yield return new WaitForSeconds(0.2f);
+        GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(selectedDot.GetComponent<DotBehavior>().color);
+        squareReady = false;
+        matchCount++;
+        //Debug.Log(matchCount);
+        if (matchBlitz != null)
+        {
+            //fDebug.Log("hello I am here");
+            int movesLeft = matchBlitz.GetComponent<MatchBlitz>().movesLeft;
+            movesLeft--;
+
+            matchBlitz.GetComponent<MatchBlitz>().movesLeft = movesLeft;
+        }
+        myLineRenderer.positionCount = 0;
+        //foreach(GameObject dot in selectedDots)
+        //{
+        //    selectedDots.Remove(dot);
+        //}
+
+        selectedDots = new List<GameObject>();
+        selectedDot = null;
 
     }
 
@@ -202,5 +229,5 @@ public class GameManager : MonoBehaviour
 
         gridManager.ColorPulse(selectedDot.GetComponent<DotBehavior>().color);
     }
-    
+
 }

@@ -226,7 +226,7 @@ public class GridManager : MonoBehaviour
             {
                 if (gridArray[i, j].dot != null && gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col && !myManager.selectedDots.Contains(gridArray[i,j].dot))
                 {
-
+                    Debug.Log("pulse everyone else");
                     gridArray[i, j].dot.GetComponent<Animator>().SetBool("selected", true);
 
                     
@@ -235,9 +235,7 @@ public class GridManager : MonoBehaviour
             }
         }
         //dropDown();
-
-        
-        
+        Debug.Log("out");
     }
 
 }
