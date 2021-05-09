@@ -118,7 +118,9 @@ public class GridManager : MonoBehaviour
                 if(gridArray[i, j].dot != null && gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col){
                     scoreSquare += 100 * colorCount;
                     colorCount++;
+                    gridArray[i, j].dot.GetComponent<Animator>().SetBool("delete", true);
                     Destroy(gridArray[i, j].dot);
+                    
                     //Debug.Log(scoreSquare);
                     gridArray[i, j].dot = null;
                 }

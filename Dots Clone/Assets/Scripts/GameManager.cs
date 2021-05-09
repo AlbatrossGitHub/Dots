@@ -212,8 +212,8 @@ public class GameManager : MonoBehaviour
             if (d.GetComponent<Animator>().GetBool("selected") == true)
             {
                 Debug.Log("goto final selected");
-                d.GetComponent<Animator>().SetBool("final selected", true);
-                //d.GetComponent<Animator>().SetBool("selected", true);
+                //d.GetComponent<Animator>().SetBool("final selected", true);
+                d.GetComponent<Animator>().SetBool("selected", true);
 
             }
             else
