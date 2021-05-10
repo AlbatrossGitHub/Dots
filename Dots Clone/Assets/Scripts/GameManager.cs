@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Vector3 mousePos;
 
     public Text scoreText;
+    public Text scoreText1;
 
     public List<GameObject> selectedDots = new List<GameObject>();
 
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
         lineEnd = mousePos; //line end is the variable for where the ray should end
 
         scoreText.text = "";
+        scoreText1.text = "";
     }
 
 
@@ -50,6 +52,7 @@ public class GameManager : MonoBehaviour
         gameObject.transform.position = mousePos; //moves the object this script is on to where the mouse is
 
         scoreText.text = "" + score;
+        scoreText1.text = "" + score;
 
         if (selectedDot != null) //if we have  clicked on a dot
         {
@@ -64,7 +67,12 @@ public class GameManager : MonoBehaviour
 
                     for (int i = 0; i < selectedDots.Count; i++)
                     {
-                        myLineRenderer.SetPosition(i, selectedDots[i].transform.position);
+                        if (selectedDots[i] == null)
+                        {
+                            selectedDots.RemoveAt(i);
+                            continue;
+                        }
+                        myLineRenderer.SetPosition(i, selectedDots[i].transform.position);                        
                     }
 
                     if (endDot == null || endDot == selectedDot)
@@ -106,11 +114,13 @@ public class GameManager : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 //GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(GameObject.Find("GridManager").GetComponent<GridManager>().tileColor[1]); THIS WAS JUST FOR TESTING
-
+                Debug.Log("mouse up");
                 if (selectedDot.GetComponent<DotBehavior>().selected && selectedDots.Count > 1)
                 {
+                    Debug.Log("in big if statement");
                     if (squareReady)
                     {
+                        Debug.Log("in if statement");
                         //if you make a square and it deletes everything
                         StartCoroutine(squareDelete());
                         refreshDots = false;
@@ -121,7 +131,7 @@ public class GameManager : MonoBehaviour
                         for (int i = 0; i < selectedDots.Count; i++)
                         {
                             //Debug.Log(gridManager);                            
-                            score += 100 * i;
+                            score += 5 * i;
                             selectedDots[i].GetComponent<Animator>().SetBool("delete", true);
                             //Destroy(selectedDots[i]); //deleting the dot itself
 
@@ -146,6 +156,11 @@ public class GameManager : MonoBehaviour
                         selectedDots = new List<GameObject>();
                     }
 
+                }
+                else
+                {
+                    selectedDot = null;
+                    selectedDots = new List<GameObject>();
                 }
                 if (refreshDots)
                 {
@@ -182,6 +197,7 @@ public class GameManager : MonoBehaviour
     IEnumerator squareDelete()
     {
         yield return new WaitForSeconds(0.2f);
+        Debug.Log("in coroutine");
         GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(selectedDot.GetComponent<DotBehavior>().color);
         squareReady = false;
         matchCount++;
@@ -213,14 +229,14 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("goto final selected");
                 //d.GetComponent<Animator>().SetBool("final selected", true);
-                d.GetComponent<Animator>().SetBool("selected", true);
+                //d.GetComponent<Animator>().SetBool("selected", true);
 
             }
             else
             {
                 Debug.Log("go to regular selected");
                 //d.GetComponent<Animator>().SetBool("selected", false);
-                d.GetComponent<Animator>().SetBool("selected", true);
+                //d.GetComponent<Animator>().SetBool("selected", true);
             }
 
             //d.GetComponent<Animator>().SetTrigger("selected trigger");

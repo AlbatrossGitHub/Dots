@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MatchBlitz : MonoBehaviour
 {
@@ -17,6 +18,18 @@ public class MatchBlitz : MonoBehaviour
     public RectTransform panel;
     public RectTransform placer;
 
+    public Transform moveBox;
+    public Transform scoreBox;
+    public Transform backBox;
+    //public Transform settingsBox;
+
+    public Transform movePlacer;
+    public Transform scorePlacer;
+    public Transform backPlacer;
+    //public Transform settingsPlacer;
+
+    public float lerpSpeed;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +37,10 @@ public class MatchBlitz : MonoBehaviour
         movesText.text = "";
         movesLeft = winCond;
         panel.anchoredPosition = new Vector3(placer.anchoredPosition.x, 1500, 0);
+        //moveBox.position = new Vector3(movePlacer.position.x, 500, 0);
+
+        
+
     }
 
     // Update is called once per frame
@@ -36,11 +53,19 @@ public class MatchBlitz : MonoBehaviour
             //gridManager.GetComponent<GridManager>().enabled = false;
             //Debug.Log("level over");
 
-            panel.anchoredPosition = Vector3.Lerp(panel.anchoredPosition, placer.anchoredPosition, .1f);
+            panel.anchoredPosition = Vector3.Lerp(panel.anchoredPosition, placer.anchoredPosition, .04f);
+
+            moveBox.position = Vector3.Lerp(moveBox.position, movePlacer.position, lerpSpeed);
+            scoreBox.position = Vector3.Lerp(scoreBox.position, scorePlacer.position, lerpSpeed);
+            backBox.position = Vector3.Lerp(backBox.position, backPlacer.position, lerpSpeed);
         }
 
 
 
         movesText.text = "" + movesLeft;
     }
+
+   
+
+
 }

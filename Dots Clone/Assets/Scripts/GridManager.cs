@@ -101,6 +101,7 @@ public class GridManager : MonoBehaviour
     // when youre making a square
     public void ColorClear(Color Col){
         //declaring variable for score
+        Debug.Log("in color clear");
         int scoreSquare = myManager.GetComponent<GameManager>().score;
         int colorCount = 0;
         
@@ -116,13 +117,14 @@ public class GridManager : MonoBehaviour
         for (int i = 0; i < xSize; i++){
             for(int j = 0; j < ySize; j++){
                 if(gridArray[i, j].dot != null && gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col){
-                    scoreSquare += 100 * colorCount;
+                    scoreSquare += 5 * colorCount;
                     colorCount++;
                     gridArray[i, j].dot.GetComponent<Animator>().SetBool("delete", true);
-                    Destroy(gridArray[i, j].dot);
+                    //Destroy(gridArray[i, j].dot);
                     
                     //Debug.Log(scoreSquare);
-                    gridArray[i, j].dot = null;
+                    //gridArray[i, j].dot = null;
+
                 }
             }
         }
@@ -132,9 +134,12 @@ public class GridManager : MonoBehaviour
         myManager.GetComponent<GameManager>().score = scoreSquare;
     }
 
+    int dropped = 0;
+
     //to have dots fall
     public void dropDown()
     {
+        dropped = 0;
         for (int i = 0; i < xSize; i++)
         {
             for (int j = 0; j < ySize; j++)
@@ -145,6 +150,7 @@ public class GridManager : MonoBehaviour
                     //Debug.Log(i + "," + j);
                     if (gridArray[i, j - 1].dot == null)
                     {
+                        dropped++;
                         int origY = j;
 
                         GameObject thisDot = gridArray[i, j].dot;
@@ -170,13 +176,15 @@ public class GridManager : MonoBehaviour
                 
             }
         }
+        //Debug.Log("dropped: " + dropped);
+
     }
 
-    int prevColor = 0;
+    public int prevColor = 0;
 
     public void repopulate()
     {
-        
+        //Debug.Log("prev color: " + prevColor);
         for (int i = 0; i < xSize; i++)
         {
             for (int j = 0; j < ySize; j++){
@@ -191,8 +199,11 @@ public class GridManager : MonoBehaviour
             //     gridArray[i, ySize - 1].dot = CreateTile(i, ySize - 1);                
             // }
         }
-
-        prevColor = -1;
+        if(dropped == 0 && prevColor != -1)
+        {
+            prevColor = -1;            
+        }
+        
     }
 
     //variable used in repopulate check n stuff
@@ -226,8 +237,9 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < ySize; j++)
             {
-                if (gridArray[i, j].dot != null && gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col && !myManager.selectedDots.Contains(gridArray[i,j].dot))
+                if (gridArray[i, j].dot != null && gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col && !myManager.selectedDots.Contains(gridArray[i, j].dot))
                 {
+                    
                     Debug.Log("pulse everyone else");
                     gridArray[i, j].dot.GetComponent<Animator>().SetBool("selected", true);
 

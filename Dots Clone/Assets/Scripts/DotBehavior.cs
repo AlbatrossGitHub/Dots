@@ -49,6 +49,7 @@ public class DotBehavior : MonoBehaviour
         if (myManager.isActiveAndEnabled == true)
         {
             Debug.Log("play clicked when selected");
+            
             myAnim.SetBool("selected", true);
         }
         myManager.myLineRenderer.startColor = color;
@@ -62,8 +63,21 @@ public class DotBehavior : MonoBehaviour
     void OnMouseEnter()
     {
         if(myManager.selectedDots.Count > 0){ //if the x and y is within one of this one, and if it is not outside the bounds
-            int xPrevious = myManager.selectedDots[myManager.selectedDots.Count-1].GetComponent<DotBehavior>().gridX;
-            int yPrevious = myManager.selectedDots[myManager.selectedDots.Count-1].GetComponent<DotBehavior>().gridY;
+            int xPrevious = 0;
+            int yPrevious = 0;
+            //for debugging when a dot is being accesssed when its disappearing
+            if(myManager.selectedDots[myManager.selectedDots.Count -1] != null)
+            {
+                xPrevious = myManager.selectedDots[myManager.selectedDots.Count - 1].GetComponent<DotBehavior>().gridX;
+                yPrevious = myManager.selectedDots[myManager.selectedDots.Count - 1].GetComponent<DotBehavior>().gridY;
+            }
+            else
+            {
+                myManager.selectedDots = new List<GameObject>();
+                myManager.myLineRenderer.positionCount = 0;
+                return;
+            }
+
             if(Mathf.Abs(gridX-xPrevious) <= 1){
                 if(gridX-xPrevious != 0){
                     if(gridY-yPrevious != 0){
@@ -124,15 +138,41 @@ public class DotBehavior : MonoBehaviour
             selectionCounter = 0;
         }
 
+        myAnim.SetBool("selected", false);
 
 
+    }
+
+    private void OnMouseUpAsButton()
+    {
+        if(myManager.selectedDots.Count == 1)
+        {
+            myManager.selectedDot = null;
+        }
+        
+        myAnim.SetBool("selected", false);
     }
 
     public void DestroyGameObject()
     {
         Debug.Log(transform.localScale);
         myManager.gridManager.gridArray[gridX, gridY].dot = null; //removing the dot from the datastructure
+        for (int c = 0; c < myManager.gridManager.tileColor.Length; c++)
+        {
+            if (myManager.gridManager.tileColor[c] == color)
+            {
+                myManager.gridManager.prevColor = c;
+            }
+        }
+        
         Destroy(gameObject);
+    }
+
+    public void ColliderOff()
+    {
+        
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        Debug.Log(gameObject.GetComponent<CircleCollider2D>().enabled);
     }
 
     public void boolFalse()
