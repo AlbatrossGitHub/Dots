@@ -19,8 +19,9 @@ public class ReloadScene : MonoBehaviour
 
     private void OnMouseDown()
     {
+
             Debug.Log("click");
-            SceneManager.LoadScene("Match Blitz");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }
 

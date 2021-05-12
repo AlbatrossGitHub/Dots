@@ -6,27 +6,34 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
+    
     public GameObject selectedDot;
     public Vector3 lineEnd;
     public Vector3 dotOrigin;
     public Vector3 mousePos;
 
+    
     public Text scoreText;
     public Text scoreText1;
 
+    
     public List<GameObject> selectedDots = new List<GameObject>();
 
     //the second dot that gamemanager collider hits
     public GameObject connectedDot;
     public GameObject endDot;
 
+    
     public LineRenderer myLineRenderer;
 
+    
     public bool squareReady = false;
 
+    
     public GridManager gridManager;
     public MatchBlitz matchBlitz;
 
+    
     public int score;
 
     public int matchCount;
@@ -142,6 +149,7 @@ public class GameManager : MonoBehaviour
                             Debug.Log("hello I am here");
                             int movesLeft = matchBlitz.GetComponent<MatchBlitz>().movesLeft;
                             movesLeft--;
+                            gridManager.movesLeft--;
 
                             matchBlitz.GetComponent<MatchBlitz>().movesLeft = movesLeft;
                         }
@@ -207,6 +215,8 @@ public class GameManager : MonoBehaviour
             //fDebug.Log("hello I am here");
             int movesLeft = matchBlitz.GetComponent<MatchBlitz>().movesLeft;
             movesLeft--;
+
+            gridManager.movesLeft--;
 
             matchBlitz.GetComponent<MatchBlitz>().movesLeft = movesLeft;
         }

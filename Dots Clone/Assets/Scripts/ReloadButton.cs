@@ -28,7 +28,7 @@ void Update()
 
 public void TaskOnClick()
     {
-        SceneManager.LoadScene("Match Blitz");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 

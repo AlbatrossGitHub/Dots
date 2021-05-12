@@ -13,7 +13,7 @@ public class MatchBlitz : MonoBehaviour
 
     public int winCond;
     public int winCount;
-    public int movesLeft;
+    public int movesLeft;    
 
     public RectTransform panel;
     public RectTransform placer;
@@ -39,7 +39,7 @@ public class MatchBlitz : MonoBehaviour
         panel.anchoredPosition = new Vector3(placer.anchoredPosition.x, 1500, 0);
         //moveBox.position = new Vector3(movePlacer.position.x, 500, 0);
 
-        
+        gridManager.movesLeft = movesLeft;
 
     }
 
@@ -47,9 +47,9 @@ public class MatchBlitz : MonoBehaviour
     void Update()
     {
         winCount = myManager.GetComponent<GameManager>().matchCount;
-        if(winCount == winCond)
+        if(winCount == winCond && gridManager.lastMatch)
         {
-            myManager.GetComponent<GameManager>().enabled = false;
+            
             //gridManager.GetComponent<GridManager>().enabled = false;
             //Debug.Log("level over");
 

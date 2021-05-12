@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Match Blitz.unity
+    path: Assets/Scenes/Time Blitz.unity
     guid: 84c933fdd0176fc49bbe1b94b9a5a351
+  - enabled: 1
+    path: Assets/Scenes/Match Blitz.unity
+    guid: 2b0e823244c86407faf44f819d77b01c
   m_configObjects: {}

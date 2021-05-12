@@ -7,6 +7,8 @@ public class DotBehavior : MonoBehaviour
 
     public GameManager myManager;
 
+    public SoundManager soundManager;
+
     public bool selected = false; //bool for whether the dot is selected or not
 
     public int gridX;
@@ -28,6 +30,9 @@ public class DotBehavior : MonoBehaviour
     {
         //set grid position
         //gridPosition = gameObject.transform.position;
+
+        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
+
     }
 
     // Update is called once per frame
@@ -51,6 +56,8 @@ public class DotBehavior : MonoBehaviour
             Debug.Log("play clicked when selected");
             
             myAnim.SetBool("selected", true);
+
+            soundManager.PlayConnect(1);
         }
         myManager.myLineRenderer.startColor = color;
         myManager.myLineRenderer.endColor = color;
@@ -102,6 +109,8 @@ public class DotBehavior : MonoBehaviour
                             //myAnim.SetTrigger("selected trigger");
                             Debug.Log("go to regular connected selected");
                             myAnim.SetBool("selected", true);
+
+                            soundManager.PlayConnect(myManager.selectedDots.Count);
                         }
 
                     } else {
@@ -120,6 +129,8 @@ public class DotBehavior : MonoBehaviour
                             myManager.squareReady = true;//GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(color);
                             //myAnim.SetTrigger("selected trigger");
                             myManager.squareAnim();
+
+                            soundManager.PlaySound(soundManager.squareConnect);
                         }
                     }
                 }

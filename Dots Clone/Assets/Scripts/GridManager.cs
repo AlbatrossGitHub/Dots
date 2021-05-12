@@ -11,6 +11,12 @@ public class GridManager : MonoBehaviour
     public Vector3 startPos;
     public float xStagger, yStagger;
 
+    public bool lastMatch = false;
+
+    //needs to be set to a number to work 
+    public int movesLeft = 20;
+    public float timer = 60f;
+
     List<GameObject> tiles = new List<GameObject>();
 
     public gridPos[,] gridArray;
@@ -177,7 +183,21 @@ public class GridManager : MonoBehaviour
             }
         }
         //Debug.Log("dropped: " + dropped);
+        if(movesLeft <= 0 && lastMatch == false)
+        {
+            //calling a function w/ delay
+            Invoke("delayedMatch", 1f);
+            myManager.enabled = false;
 
+        }
+
+        if (timer <= 0 && lastMatch == false)
+        {
+            //calling a function w/ delay
+            Invoke("delayedMatch", 1f);
+            myManager.enabled = false;
+
+        }
     }
 
     public int prevColor = 0;
@@ -250,6 +270,11 @@ public class GridManager : MonoBehaviour
         }
         //dropDown();
         Debug.Log("out");
+    }
+
+    public void delayedMatch()
+    {
+        lastMatch = true;
     }
 
 }
