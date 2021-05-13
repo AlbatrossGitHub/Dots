@@ -1996,7 +1996,8 @@ MonoBehaviour:
   scorePlacer: {fileID: 868942598}
   backPlacer: {fileID: 1132283378}
   lerpSpeed: 0.03
-  timer: 10
+  timer: 60
+  timerStart: 0
 --- !u!4 &1195347678
 Transform:
   m_ObjectHideFlags: 0

@@ -69,6 +69,7 @@ public class DotBehavior : MonoBehaviour
 
     void OnMouseEnter()
     {
+        myAnim.SetBool("hover", true);
         if(myManager.selectedDots.Count > 0){ //if the x and y is within one of this one, and if it is not outside the bounds
             int xPrevious = 0;
             int yPrevious = 0;
@@ -117,9 +118,11 @@ public class DotBehavior : MonoBehaviour
                         if(myManager.selectedDots[myManager.selectedDots.Count - 1] == gameObject && selectionCounter == 1){ //if this is the last thing on the list
                             if(myManager.squareReady == false){
                                 myManager.selectedDots.Remove(gameObject);
+                                myAnim.SetBool("selected", false);
                             } else {
                                 myManager.squareReady = false;
                                 myManager.selectedDots.RemoveAt(myManager.selectedDots.Count-1);
+                                myAnim.SetBool("selected", false);
                             }
                             selectionCounter = 2;
                             myManager.endDot = null;
@@ -140,6 +143,7 @@ public class DotBehavior : MonoBehaviour
 
     void OnMouseExit()
     {
+        myAnim.SetBool("hover", false);
         myManager.endDot = null;
         //Debug.Log("I am NOT OVER this!");
         if(selectionCounter == 0){
@@ -149,7 +153,7 @@ public class DotBehavior : MonoBehaviour
             selectionCounter = 0;
         }
 
-        myAnim.SetBool("selected", false);
+        //myAnim.SetBool("selected", false);
 
 
     }
@@ -189,6 +193,10 @@ public class DotBehavior : MonoBehaviour
     public void boolFalse()
     {
         //myAnim.SetBool("selected", false);
+    }
+
+    public void OnMouseUp(){
+        myAnim.SetBool("selected", false);
     }
 
 }
