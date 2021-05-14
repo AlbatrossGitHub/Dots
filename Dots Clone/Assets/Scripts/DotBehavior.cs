@@ -122,7 +122,7 @@ public class DotBehavior : MonoBehaviour
                             } else {
                                 myManager.squareReady = false;
                                 myManager.selectedDots.RemoveAt(myManager.selectedDots.Count-1);
-                                myAnim.SetBool("selected", false);
+                                //myAnim.SetBool("selected", false);
                             }
                             selectionCounter = 2;
                             myManager.endDot = null;
@@ -152,8 +152,6 @@ public class DotBehavior : MonoBehaviour
         if(selectionCounter == 2){
             selectionCounter = 0;
         }
-
-        //myAnim.SetBool("selected", false);
 
 
     }

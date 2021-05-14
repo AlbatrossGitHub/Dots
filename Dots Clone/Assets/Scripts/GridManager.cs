@@ -40,8 +40,6 @@ public class GridManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-
         gridArray = new gridPos [xSize, ySize];
         for(int x = 0; x < xSize; x++){
             for(int y = 0; y < ySize; y++){
@@ -58,6 +56,18 @@ public class GridManager : MonoBehaviour
     {
         dropDown();
         repopulate();
+
+        //for all the dots in the grid, if the dot is the selected color and the dot is not on the line and square ready is false, then selected is false
+        //parts.Contains(new Part {PartId=1734, PartName="" }));
+
+        for (int i = 0; i < xSize; i++){
+            for(int j = 0; j < ySize; j++){
+                if(myManager.selectedDots.Contains(gridArray[i, j].dot) == false && myManager.squareReady == false){
+                    gridArray[i, j].dot.GetComponent<Animator>().SetBool("selected", false);
+                }
+            }
+        }
+
     }
 
     GameObject CreateTile(int x, int y, int colorAvoid){ //this is a function which will return a gameobject value.
@@ -111,7 +121,7 @@ public class GridManager : MonoBehaviour
         int scoreSquare = myManager.GetComponent<GameManager>().score;
         int colorCount = 0;
         
-
+        //makes new dots not be the previous color
         for (int c = 0; c < tileColor.Length; c++)
         {
             if(tileColor[c] == Col)
@@ -120,6 +130,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
+        //select all 
         for (int i = 0; i < xSize; i++){
             for(int j = 0; j < ySize; j++){
                 if(gridArray[i, j].dot != null && gridArray[i, j].dot.GetComponent<DotBehavior>().color == Col){

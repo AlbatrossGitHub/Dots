@@ -76,7 +76,9 @@ public class GameManager : MonoBehaviour
                     {
                         if (selectedDots[i] == null)
                         {
+                            selectedDots[i].GetComponent<Animator>().SetBool("select", false);
                             selectedDots.RemoveAt(i);
+                            
                             continue;
                         }
                         myLineRenderer.SetPosition(i, selectedDots[i].transform.position);                        
@@ -196,7 +198,9 @@ public class GameManager : MonoBehaviour
 
         }
 
+        //for all the dots in the grid, if the dot is the selected color and the dot is not on the line and square ready is false, then selected is false
 
+        
 
         //store information of direction of the dot
 
