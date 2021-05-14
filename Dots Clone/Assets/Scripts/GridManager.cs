@@ -117,6 +117,7 @@ public class GridManager : MonoBehaviour
     // when youre making a square
     public void ColorClear(Color Col){
         //declaring variable for score
+        GameObject.Find("White").GetComponent<Animator>().SetBool("solid", true);
         Debug.Log("in color clear");
         int scoreSquare = myManager.GetComponent<GameManager>().score;
         int colorCount = 0;

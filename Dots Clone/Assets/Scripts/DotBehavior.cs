@@ -118,9 +118,11 @@ public class DotBehavior : MonoBehaviour
                         if(myManager.selectedDots[myManager.selectedDots.Count - 1] == gameObject && selectionCounter == 1){ //if this is the last thing on the list
                             if(myManager.squareReady == false){
                                 myManager.selectedDots.Remove(gameObject);
+                                GameObject.Find("White").GetComponent<Animator>().SetBool("solid", true);
                                 myAnim.SetBool("selected", false);
                             } else {
                                 myManager.squareReady = false;
+                                GameObject.Find("White").GetComponent<Animator>().SetBool("solid", true);
                                 myManager.selectedDots.RemoveAt(myManager.selectedDots.Count-1);
                                 //myAnim.SetBool("selected", false);
                             }
@@ -130,6 +132,7 @@ public class DotBehavior : MonoBehaviour
                         if(selectionCounter < 2 && myManager.selectedDots.Count - myManager.selectedDots.IndexOf(gameObject) >= 3 && myManager.squareReady == false){
                             myManager.selectedDots.Add(gameObject);
                             myManager.squareReady = true;//GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(color);
+                            GameObject.Find("White").GetComponent<Animator>().SetBool("solid", false);
                             //myAnim.SetTrigger("selected trigger");
                             myManager.squareAnim();
 
