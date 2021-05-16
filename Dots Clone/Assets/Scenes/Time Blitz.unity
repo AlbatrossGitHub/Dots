@@ -1341,7 +1341,7 @@ MonoBehaviour:
   panel: {fileID: 960697188}
   placer: {fileID: 714858464}
   lerpSpeed: 0.03
-  timer: 3
+  timer: 60
   timerStart: 0
 --- !u!4 &1195347678
 Transform:
