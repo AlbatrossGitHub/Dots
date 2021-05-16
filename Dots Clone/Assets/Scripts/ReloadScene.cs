@@ -20,8 +20,8 @@ public class ReloadScene : MonoBehaviour
     private void OnMouseDown()
     {
 
-            Debug.Log("click");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("click");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }
 

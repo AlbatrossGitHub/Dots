@@ -10,10 +10,8 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     AudioClip connect1, connect2, connect3, connect4, connect5, connect6, connect7;
-
-    [SerializeField]
-    AudioClip btnClick, btnBack;
-
+    
+    public AudioClip btnClick, btnBack;
     
     public AudioClip squareConnect, delete, levelEnd;
 

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 99ec141a37b95484f993e16dd9710ba0
+  - enabled: 1
     path: Assets/Scenes/Time Blitz.unity
     guid: 84c933fdd0176fc49bbe1b94b9a5a351
   - enabled: 1

@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
 
     
     public GridManager gridManager;
-    public MatchBlitz matchBlitz;
+    public SoundManager soundManager;
+    public MatchBlitz matchBlitz;    
 
     
     public int score;
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
     {
         mousePos = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z); //variable fo rthe mouse position
         lineEnd = mousePos; //line end is the variable for where the ray should end
+
+        soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
 
         scoreText.text = "";
         scoreText1.text = "";
@@ -123,22 +126,25 @@ public class GameManager : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 //GameObject.Find("GridManager").GetComponent<GridManager>().ColorClear(GameObject.Find("GridManager").GetComponent<GridManager>().tileColor[1]); THIS WAS JUST FOR TESTING
-                Debug.Log("mouse up");
+                //Debug.Log("mouse up");
                 if (selectedDot.GetComponent<DotBehavior>().selected && selectedDots.Count > 1)
                 {
-                    Debug.Log("in big if statement");
+                    //Debug.Log("in big if statement");
                     if (squareReady)
                     {
-                        Debug.Log("in if statement");
+                        //Debug.Log("in if statement");
                         //if you make a square and it deletes everything
+                        soundManager.PlaySound(soundManager.delete);
                         StartCoroutine(squareDelete());
                         refreshDots = false;
+
                     }
                     else
                     {
                         //straight line
                         for (int i = 0; i < selectedDots.Count; i++)
                         {
+                            soundManager.PlaySound(soundManager.delete);
                             //Debug.Log(gridManager);                            
                             score += 5 * i;
                             selectedDots[i].GetComponent<Animator>().SetBool("delete", true);

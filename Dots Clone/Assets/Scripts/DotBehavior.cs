@@ -7,6 +7,8 @@ public class DotBehavior : MonoBehaviour
 
     public GameManager myManager;
 
+    
+
     public SoundManager soundManager;
 
     public bool selected = false; //bool for whether the dot is selected or not
@@ -32,7 +34,7 @@ public class DotBehavior : MonoBehaviour
         //gridPosition = gameObject.transform.position;
 
         soundManager = GameObject.Find("Sound Manager").GetComponent<SoundManager>();
-
+        
     }
 
     // Update is called once per frame
@@ -167,6 +169,8 @@ public class DotBehavior : MonoBehaviour
         }
         
         myAnim.SetBool("selected", false);
+
+        
     }
 
     public void DestroyGameObject()
@@ -180,6 +184,8 @@ public class DotBehavior : MonoBehaviour
                 myManager.gridManager.prevColor = c;
             }
         }
+
+
         
         Destroy(gameObject);
     }
