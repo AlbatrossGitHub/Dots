@@ -239,7 +239,7 @@ public class GridManager : MonoBehaviour
     }
 
     //variable used in repopulate check n stuff
-    int extraCheck = 0;
+    //int extraCheck = 0;
 
     public void repopulateCheck()
     {
