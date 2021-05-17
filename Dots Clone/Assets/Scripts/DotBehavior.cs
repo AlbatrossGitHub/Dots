@@ -40,7 +40,7 @@ public class DotBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Vector3.Distance(gameObject.transform.position, gridPosition) > .05f)
+        if(Vector3.Distance(gameObject.transform.position, gridPosition) > .1f)
         {
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, gridPosition, step);
         }
