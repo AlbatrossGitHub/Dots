@@ -7,8 +7,6 @@ public class DotBehavior : MonoBehaviour
 
     public GameManager myManager;
 
-    
-
     public SoundManager soundManager;
 
     public bool selected = false; //bool for whether the dot is selected or not
@@ -45,6 +43,12 @@ public class DotBehavior : MonoBehaviour
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, gridPosition, step);
         }
 
+        if(myManager.enabled == false)
+        {
+            endAnim();
+        }
+        
+
         // if(selected == true){
         //     myAnim.SetBool("selected", true);
         // }
@@ -61,6 +65,8 @@ public class DotBehavior : MonoBehaviour
 
             soundManager.PlayConnect(1);
         }
+
+        
         myManager.myLineRenderer.startColor = color;
         myManager.myLineRenderer.endColor = color;
         //when we click the mouse, this dot becomes the selected dot
@@ -175,19 +181,20 @@ public class DotBehavior : MonoBehaviour
 
     public void DestroyGameObject()
     {
-        Debug.Log(transform.localScale);
-        myManager.gridManager.gridArray[gridX, gridY].dot = null; //removing the dot from the datastructure
-        for (int c = 0; c < myManager.gridManager.tileColor.Length; c++)
+        if (myManager.enabled == true)
         {
-            if (myManager.gridManager.tileColor[c] == color)
+            Debug.Log(transform.localScale);
+            myManager.gridManager.gridArray[gridX, gridY].dot = null; //removing the dot from the datastructure
+            for (int c = 0; c < myManager.gridManager.tileColor.Length; c++)
             {
-                myManager.gridManager.prevColor = c;
+                if (myManager.gridManager.tileColor[c] == color)
+                {
+                    myManager.gridManager.prevColor = c;
+                }
             }
+
+            Destroy(gameObject);
         }
-
-
-        
-        Destroy(gameObject);
     }
 
     public void ColliderOff()
@@ -204,6 +211,11 @@ public class DotBehavior : MonoBehaviour
 
     public void OnMouseUp(){
         myAnim.SetBool("selected", false);
+    }
+
+    public void endAnim()
+    {
+        myAnim.SetBool("delete", true);
     }
 
 }

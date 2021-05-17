@@ -199,6 +199,7 @@ public class GridManager : MonoBehaviour
         {
             //calling a function w/ delay
             Invoke("delayedMatch", 1f);
+            myManager.myLineRenderer.enabled = false;
             myManager.enabled = false;
 
         }
@@ -207,6 +208,7 @@ public class GridManager : MonoBehaviour
         {
             //calling a function w/ delay
             Invoke("delayedMatch", 1f);
+            myManager.myLineRenderer.enabled = false;
             myManager.enabled = false;
 
         }
