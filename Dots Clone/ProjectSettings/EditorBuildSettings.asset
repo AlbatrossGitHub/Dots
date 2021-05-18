@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Match Blitz.unity
     guid: 2b0e823244c86407faf44f819d77b01c
+  - enabled: 1
+    path: Assets/Scenes/Infinite.unity
+    guid: 3bc33153883194f98bb5d3f3b10004da
   m_configObjects: {}

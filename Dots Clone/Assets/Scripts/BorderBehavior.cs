@@ -34,6 +34,9 @@ public class BorderBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(myManager.enabled == false){
+            myLineRenderer.enabled = false;
+        }
         myLineRenderer.startColor = myManager.myLineRenderer.startColor;
         myLineRenderer.endColor = myManager.myLineRenderer.endColor;
 
@@ -65,7 +68,9 @@ public class BorderBehavior : MonoBehaviour
         
         if (Input.GetMouseButton(0))
             {
-                myLineRenderer.enabled = true;
+                if(myManager.enabled == true){
+                    myLineRenderer.enabled = true;
+                }
 
                 for(int i = 0; i <= gameObject.transform.childCount; i++){
                     if(myLineRenderer.positionCount > i){
