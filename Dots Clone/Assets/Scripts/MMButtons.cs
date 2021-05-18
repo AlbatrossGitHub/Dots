@@ -65,7 +65,7 @@ public class MMButtons : MonoBehaviour
         Debug.Log("should play");
         if(modeTracker == 0)
         {
-            //SceneManager.LoadScene();
+            SceneManager.LoadScene("Infinite");
         }
 
         if(modeTracker == 1)
