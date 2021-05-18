@@ -40,6 +40,7 @@ public class GridManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ShuffleArray(tileColor);
         gridArray = new gridPos [xSize, ySize];
         for(int x = 0; x < xSize; x++){
             for(int y = 0; y < ySize; y++){
@@ -47,7 +48,7 @@ public class GridManager : MonoBehaviour
                 gridArray[x, y] = new gridPos(newTile, newTile.transform.position); //our 2D array is an array of x that holds an array of y that holds an array of gameobjects.
             }
         }
-
+        
         
     }
 
@@ -289,6 +290,18 @@ public class GridManager : MonoBehaviour
     public void delayedMatch()
     {
         lastMatch = true;
+    }
+
+    private void ShuffleArray(Color[] arrayToShuffle)
+    {
+        //theres lots of really crazy efficient shuffling things, like for lists with 1,000 things. But we only have a list of 5 so we can do it simplier.
+        //fisher yates algorithm
+        for(int i = 0; i < arrayToShuffle.Length; i++){
+            Color temp = arrayToShuffle[i];
+            int r = Random.Range(i, arrayToShuffle.Length);
+            arrayToShuffle[i] = arrayToShuffle[r];
+            arrayToShuffle[r] = temp;
+        }
     }
 
 }
