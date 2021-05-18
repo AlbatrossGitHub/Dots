@@ -540,7 +540,7 @@ MonoBehaviour:
   gridManager: {fileID: 1969832001}
   soundManager: {fileID: 1884205392}
   movesText: {fileID: 465513851301041049}
-  winCond: 2
+  winCond: 15
   winCount: 0
   movesLeft: 0
   panel: {fileID: 465513851328388441}

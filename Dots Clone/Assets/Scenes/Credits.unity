@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 740243314}
   - component: {fileID: 740243313}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1154,8 +1154,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27.000017, y: -408}
-  m_SizeDelta: {x: 623.1455, y: 74.61262}
+  m_AnchoredPosition: {x: 39.1, y: -408}
+  m_SizeDelta: {x: 647.31934, y: 74.61262}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209944065
 MonoBehaviour:

@@ -689,7 +689,7 @@ MonoBehaviour:
   topPlacer: {fileID: 1524200820}
   botPlacer: {fileID: 1872145609}
   lerpSpeed: 0.03
-  timer: 2
+  timer: 60
   timerStart: 0
 --- !u!4 &1195347678
 Transform:
@@ -816,6 +816,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446111536821481495, guid: 723e41ac19cb44ebfa66fcdabe02e5e2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1991816901}
+    - target: {fileID: 4446111536821481495, guid: 723e41ac19cb44ebfa66fcdabe02e5e2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GotoMM
       objectReference: {fileID: 0}
     - target: {fileID: 4446111536821481513, guid: 723e41ac19cb44ebfa66fcdabe02e5e2,
         type: 3}
@@ -1101,6 +1111,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1991816901 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7584027948068413694, guid: 746f3fdcb3fa441a2a88cb347587527b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7584027948859198432}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0d0bfc2e56d40e9a14a39523a831b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &607543840473006456
 PrefabInstance:
   m_ObjectHideFlags: 0
