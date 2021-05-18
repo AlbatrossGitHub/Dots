@@ -34,7 +34,6 @@ public class BorderBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         myLineRenderer.startColor = myManager.myLineRenderer.startColor;
         myLineRenderer.endColor = myManager.myLineRenderer.endColor;
 
@@ -46,19 +45,22 @@ public class BorderBehavior : MonoBehaviour
                 lineTotal -= .04f;
             }
             myLineRenderer.loop = false;
+            GameObject.Find("White").GetComponent<Animator>().SetBool("solid", true);
             for(int i = myManager.selectedDots.Count; i < linePositions.Length; i++){
                 linePositions[i] = Vector3.zero;
             }
         } else {
-            myLineRenderer.positionCount = (int)lineTotal;
+            myLineRenderer.positionCount = gameObject.transform.childCount;
+            // myLineRenderer.positionCount = (int)lineTotal;
             
-            if(lineTotal < gameObject.transform.childCount){
-                lineTotal+= .04f;
-            } else if (lineTotal > gameObject.transform.childCount + .15f){
-                lineTotal-= .04f;
-            } else {
-                myLineRenderer.loop = true;
-            }
+            // if(lineTotal < gameObject.transform.childCount){
+            //     lineTotal+= .04f;
+            // } else if (lineTotal > gameObject.transform.childCount + .15f){
+            //     lineTotal-= .04f;
+            // } else {
+                 myLineRenderer.loop = true;
+                 GameObject.Find("White").GetComponent<Animator>().SetBool("solid", false);
+            // }
         }
         
         if (Input.GetMouseButton(0))
@@ -82,25 +84,20 @@ public class BorderBehavior : MonoBehaviour
                 // myLineRenderer.SetPosition(i, lineEnd);
                         if(gameObject.transform.childCount >= i){
                             //where the points start
-                            if(linePositions[i] == Vector3.zero && i > 0){
-                                linePositions[i] = gameObject.transform.GetChild(i-1).transform.position;
+                            if(myManager.squareReady == false){
+                                if(linePositions[i] == Vector3.zero && i > 0){
+                                    linePositions[i] = gameObject.transform.GetChild(i-1).transform.position;
+                                }
+                                //having the lines lerp
+                                Debug.Log("CURRENTLY LERPING; " + i);
+                                linePositions[i] = Vector3.Lerp(linePositions[i], gameObject.transform.GetChild(i).transform.position, .08f);
+                            } else {
+                                linePositions[i] = gameObject.transform.GetChild(i).transform.position;
                             }
-                            //having the lines lerp
-                            Debug.Log("CURRENTLY LERPING; " + i);
-                            linePositions[i] = Vector3.Lerp(linePositions[i], gameObject.transform.GetChild(i).transform.position, .08f);
                             myLineRenderer.SetPosition(i, linePositions[i]);
                         } else {
                             myLineRenderer.SetPosition(i, finalTarget.transform.position);
                             Debug.Log("final target");
-                // if()
-                //     Debug.Log("should be null");
-                //}
-
-                // if(gameObject.transform.GetChild(i) == null){
-                //     Debug.Log("should be null");
-                // }
-
-                //if more positions than children stop
                         }
                     }
                 }
