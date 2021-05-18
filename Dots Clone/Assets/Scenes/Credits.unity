@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 879151285}
   - component: {fileID: 879151284}
   m_Layer: 5
-  m_Name: music creds (1)
+  m_Name: jordan thank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -804,7 +804,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: -288}
+  m_AnchoredPosition: {x: 10, y: -460}
   m_SizeDelta: {x: 623.1455, y: 118.32104}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &879151284
@@ -882,7 +882,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00083923, y: -480}
+  m_AnchoredPosition: {x: -0.00083923, y: -332}
   m_SizeDelta: {x: 899.9983, y: 74.61262}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058937264
@@ -1154,7 +1154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000083923, y: -408}
+  m_AnchoredPosition: {x: -0.000083923, y: -260}
   m_SizeDelta: {x: 899.9999, y: 74.61262}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209944065

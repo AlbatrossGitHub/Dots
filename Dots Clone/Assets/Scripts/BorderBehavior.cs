@@ -43,9 +43,9 @@ public class BorderBehavior : MonoBehaviour
         if (myManager.selectedDots.Count <= gameObject.transform.childCount && myManager.squareReady == false){
             myLineRenderer.positionCount = (int)lineTotal;//-1;
             if(lineTotal < myManager.selectedDots.Count){
-                lineTotal += .02f;
+                lineTotal += .033f;
             } else if (lineTotal > myManager.selectedDots.Count + .15f){
-                lineTotal -= .02f;
+                lineTotal -= .033f;
             }
             myLineRenderer.loop = false;
             GameObject.Find("White").GetComponent<Animator>().SetBool("solid", true);
