@@ -20,7 +20,11 @@ public class TimeBlitz : MonoBehaviour
     public RectTransform panel;
     public RectTransform placer;
 
-    //public GameObject[] circles;
+    public Transform topBar;
+    public Transform botBar;
+
+    public Transform topPlacer;
+    public Transform botPlacer;
 
 
     public float lerpSpeed;
@@ -67,21 +71,9 @@ public class TimeBlitz : MonoBehaviour
 
             panel.anchoredPosition = Vector3.Lerp(panel.anchoredPosition, placer.anchoredPosition, .04f);
 
-            //circles = GameObject.FindGameObjectsWithTag("Dot");
-            //foreach (GameObject Dot in circles)
-            //{
-            //    GameObject.Find("Dot").GetComponent<DotBehavior>().endAnim();
-            //}
-          
-
-
-
-            //cubes = GameObject.FindGameObjectsWithTag("player");
-            //foreach (Object player in cubes)
-            //{
-            //    GetComponent<highlight>().targetraw = gameObject;
-            //}
-
+            topBar.position = Vector3.Lerp(topBar.position, topPlacer.position, .01f);
+            botBar.position = Vector3.Lerp(botBar.position, botPlacer.position, .01f);
+            
             endCounter++;
         }
 

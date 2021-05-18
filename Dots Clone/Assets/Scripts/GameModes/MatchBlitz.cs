@@ -20,15 +20,11 @@ public class MatchBlitz : MonoBehaviour
     public RectTransform panel;
     public RectTransform placer;
 
-    //public Transform moveBox;
-    //public Transform scoreBox;
-    //public Transform backBox;
-    //public Transform settingsBox;
+    public Transform topBar;
+    public Transform botBar;
 
-    //public Transform movePlacer;
-    //public Transform scorePlacer;
-    //public Transform backPlacer;
-    ////public Transform settingsPlacer;
+    public Transform topPlacer;
+    public Transform botPlacer;
 
     public float lerpSpeed;
 
@@ -40,6 +36,8 @@ public class MatchBlitz : MonoBehaviour
         movesLeft = winCond;
         panel.anchoredPosition = new Vector3(placer.anchoredPosition.x, 1500, 0);
         //moveBox.position = new Vector3(movePlacer.position.x, 500, 0);
+        //topBar.position = new Vector3(topPlacer.position.x, 500, 0);
+        //botBar.position = new Vector3(botPlacer.position.x, -500, 0);
 
         gridManager.movesLeft = movesLeft;
 
@@ -58,6 +56,8 @@ public class MatchBlitz : MonoBehaviour
             //Debug.Log("level over");
 
             panel.anchoredPosition = Vector3.Lerp(panel.anchoredPosition, placer.anchoredPosition, .04f);
+            topBar.position = Vector3.Lerp(topBar.position, topPlacer.position, .01f);
+            botBar.position = Vector3.Lerp(botBar.position, botPlacer.position, .01f);
 
             endCounter++;
 
