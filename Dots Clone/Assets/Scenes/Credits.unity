@@ -648,8 +648,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 73, y: 596}
-  m_SizeDelta: {x: 388.27142, y: 166.96255}
+  m_AnchoredPosition: {x: -0.0010834, y: 596}
+  m_SizeDelta: {x: 899.99774, y: 166.96255}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &740243313
 MonoBehaviour:
@@ -677,7 +677,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 60
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -726,8 +726,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: 485}
-  m_SizeDelta: {x: 623.1455, y: 118.32104}
+  m_AnchoredPosition: {x: 0.00013733, y: 485}
+  m_SizeDelta: {x: 900.00024, y: 118.32104}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &748543140
 MonoBehaviour:
@@ -882,8 +882,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27, y: -480}
-  m_SizeDelta: {x: 623.1455, y: 74.61262}
+  m_AnchoredPosition: {x: -0.00083923, y: -480}
+  m_SizeDelta: {x: 899.9983, y: 74.61262}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058937264
 MonoBehaviour:
@@ -911,13 +911,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sound effects are provided by NYU Game Center Resource Library
+  m_Text: "Sound effects are provided by \nNYU Game Center Resource Library"
 --- !u!222 &1058937265
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1154,8 +1154,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39.1, y: -408}
-  m_SizeDelta: {x: 647.31934, y: 74.61262}
+  m_AnchoredPosition: {x: -0.000083923, y: -408}
+  m_SizeDelta: {x: 899.9999, y: 74.61262}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209944065
 MonoBehaviour:
@@ -1183,7 +1183,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
