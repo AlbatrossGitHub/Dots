@@ -43,9 +43,9 @@ public class BorderBehavior : MonoBehaviour
         if (myManager.selectedDots.Count <= gameObject.transform.childCount && myManager.squareReady == false){
             myLineRenderer.positionCount = (int)lineTotal;//-1;
             if(lineTotal < myManager.selectedDots.Count){
-                lineTotal += .04f;
+                lineTotal += .02f;
             } else if (lineTotal > myManager.selectedDots.Count + .15f){
-                lineTotal -= .04f;
+                lineTotal -= .02f;
             }
             myLineRenderer.loop = false;
             GameObject.Find("White").GetComponent<Animator>().SetBool("solid", true);
@@ -95,7 +95,7 @@ public class BorderBehavior : MonoBehaviour
                                 }
                                 //having the lines lerp
                                 Debug.Log("CURRENTLY LERPING; " + i);
-                                linePositions[i] = Vector3.Lerp(linePositions[i], gameObject.transform.GetChild(i).transform.position, .08f);
+                                linePositions[i] = Vector3.Lerp(linePositions[i], gameObject.transform.GetChild(i).transform.position, .07f);
                             } else {
                                 linePositions[i] = gameObject.transform.GetChild(i).transform.position;
                             }
