@@ -29,7 +29,7 @@ public class TimeBlitz : MonoBehaviour
 
     public float lerpSpeed;
 
-    public float timer = 60;
+    public float timer = 10;
     public bool timerStart = false;
 
 
